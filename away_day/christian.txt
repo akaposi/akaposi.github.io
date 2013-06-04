@@ -1,0 +1,8 @@
+Equations Over Groups
+
+We will try to give a short introduction to this comprehensive problem,
+touching different areas of mathematics and computer science. We will
+survey past results and try to illuminate how recent improvements in
+combining computer-assisted abstract and combinatorial reasoning might
+lead to an interdisciplinary approach for developing new insightful
+results in this area.
