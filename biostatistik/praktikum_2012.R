@@ -164,7 +164,7 @@ fisher.test(t)
 
 # e) speichern als CSV in Excel, read.csv2(), head()
 # Aufgabe: die folgende Datei in Excel eröffnen und als CSV speichern:
-#          http://akaposi.web.elte.hu/biostatistik/beispiel_daten/tx-24h.xls
+#          http://akaposi.bitbucket.com/biostatistik/beispiel_daten/tx-24h.xls
 tx <- read.csv2("tx-24hr.csv", na.strings="") # mit vollständiger Pfad zur Datei
 tx
 head(tx)
@@ -184,7 +184,7 @@ chisq.test(t); fisher.test(t)
 # g) Entscheiden ob eine Variable Normalverteilung hat: hist() (sollte symmetrisch sein), qqnorm(),
 #    shapiro.test()
 # Aufgabe: die folgende Datei in Excel eröffnen und als CSV speichern:
-#          http://akaposi.web.elte.hu/biostatistik/beispiel_daten/sleep.xls
+#          http://akaposi.bitbucket.com/biostatistik/beispiel_daten/sleep.xls
 sleep <- read.csv2("sleep.csv")
 hist(sleep[, 1])
 qqnorm(sleep[, 1]) # normal quantile-quantile Abbildung
@@ -249,7 +249,7 @@ cor.test(cars[, 1], cars[, 2])
 
 # Zusätzliche Aufgaben:
 # 1.
-anest <- read.table("http://akaposi.web.elte.hu/biostatistik/beispiel_daten/anest.txt", header=TRUE)
+anest <- read.table("http://akaposi.bitbucket.com/biostatistik/beispiel_daten/anest.txt", header=TRUE)
 head(anest)
 summary(anest)
 # Aufgabe: ist der Typ der Intubation (ET: endotracheal, TT: tracheosomie) das Gleiche in den zwei
