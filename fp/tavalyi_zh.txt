@@ -1,0 +1,24 @@
+Ez a file UTF-8 kodolasu.
+
+1. Írd meg a lexikai elemző megfelelő részeit az alábbiak szerint. Feltehető, hogy a szövegek csak ezeket a karaktereket tartalmazzák: a, b, e, r (szóközt, sorvége jelet stb. sem).
+   (a) Add meg az alábbi lexikai elemfajtákhoz a megfelelő reguláris kifejezéseket.
+       i. max. három db a betűt tartalmaz, a szöveg legelső és a legutolsó karaktere is a
+       ii. három betű, az első és az utolsó karakter különbözik
+       iii. baba
+       iv. bab
+       v. arab
+       vi. egy tetszőleges karakter
+   (b) Készítsd el az első két lexikai elem automatáit.
+   (c) Add meg az alábbi szövegben a felismert lexikai elemek határait és típusát. A szóközök nem részei a szövegnek, csak tagolják azt.
+       a rab arab bab baba babar barbara rebarbara
+   (d) Változhat -e a szöveg elemzésének eredménye akkor, ha felcserélhető a szabályok sorrendje? Indokold a válaszodat.
+2. LL(1)
+
+   S -> AAA | BBB
+   A -> aA  | bB  | D
+   B -> e   | f
+   D -> d
+   
+   (a) Számítsd ki a nyelvtanhoz a FIRST és FOLLOW halmazokat.
+   (b) Add meg a nyelvtanhoz az elemző táblázatot.
+   (c) Elemezd a következő szöveget: dbeabf#
