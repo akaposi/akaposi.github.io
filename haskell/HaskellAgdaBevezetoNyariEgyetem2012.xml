@@ -308,7 +308,7 @@ j :: a -&gt; b</code></pre>
 <div class="section level1" id="tisztaság-mellékhatás-mentesség-22">
 <h1><a href="#TOC">Tisztaság (mellékhatás-mentesség) (2/2)</a></h1>
 <div class="figure">
-<img src="http://akaposi.web.elte.hu/haskell/spj-abra.png" alt="Nirvana elérése" /><p class="caption">Nirvana elérése</p>
+<img src="spj-abra.png" alt="Nirvana elérése" /><p class="caption">Nirvana elérése</p>
 </div>
 <div class="handout">
 <hr />
