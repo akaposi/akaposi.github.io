@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté" />
+  <title>ELTE Nyári Egyetem, Informatika: Haskell</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">ELTE Nyári Egyetem, Informatika: Haskell</h1>
+  <p class="author">
+Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté
+  </p>
+  <p class="date">2016.07.07</p>
+</div>
+<div id="funkcionális-programozási-stílus" class="slide section level1">
+<h1>Funkcionális programozási stílus</h1>
+<ul>
+<li>egy program függvényekből áll</li>
+<li>a függvényeket más függvények egymásra való alkalmazásával adjuk meg</li>
+<li>végül beépített függvényeket használunk</li>
+<li>elméleti alapjuk a Church-féle lambda kalkulus (1930-as évek)</li>
+</ul>
+</div>
+<div id="példa" class="slide section level1">
+<h1>Példa</h1>
+<p>Java:</p>
+<pre><code>osszeg = 0;
+for (int i = 1; i &lt;= 10; ++i)
+  osszeg = osszeg + i;</code></pre>
+<ul>
+<li>számítási módszer: változónak értékadás</li>
+</ul>
+<p>Haskell:</p>
+<pre><code>sum [1..10]</code></pre>
+<ul>
+<li>számítási módszer: függvény-alkalmazás</li>
+</ul>
+</div>
+<div id="funkcionális-programozási-nyelvek" class="slide section level1">
+<h1>Funkcionális programozási nyelvek</h1>
+<ul>
+<li>azok, melyek elősegítik a funkcionális programozási stílust</li>
+<li>más nyelveken is lehet ilyen stílusban progamozni</li>
+</ul>
+<p>Példák:</p>
+<ul>
+<li>1958 Lisp (John McCarthy, MIT)</li>
+<li>1970 ML (Robin Milner, Edinburgh)</li>
+<li>1983 Miranda (David Turner, Kent, Egyesült Királyság)</li>
+<li>1987 Haskell (bizottság, főleg európaiak)</li>
+<li>továbbiak: OCaml, Scheme, Scala, F#, Erlang</li>
+<li>hatás: Python, Java, C#, PHP, Visual Basic</li>
+</ul>
+</div>
+<div id="haskell-példaprogram" class="slide section level1">
+<h1>Haskell példaprogram</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">f []     <span class="fu">=</span> []
+f (x<span class="fu">:</span>xs) <span class="fu">=</span> f as <span class="fu">++</span> [x] <span class="fu">++</span> f bs
+  <span class="kw">where</span>
+    as <span class="fu">=</span> [a <span class="fu">|</span> a <span class="ot">&lt;-</span> xs, a <span class="fu">&lt;=</span> x]
+    bs <span class="fu">=</span> [b <span class="fu">|</span> b <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span>  b]</code></pre></div>
+</div>
+<div id="haskell-példaprogram-1" class="slide section level1">
+<h1>Haskell példaprogram</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">f []     <span class="fu">=</span> []
+f (x<span class="fu">:</span>xs) <span class="fu">=</span> f as <span class="fu">++</span> [x] <span class="fu">++</span> f bs
+  <span class="kw">where</span>
+    as <span class="fu">=</span> [a <span class="fu">|</span> a <span class="ot">&lt;-</span> xs, a <span class="fu">&lt;=</span> x]
+    bs <span class="fu">=</span> [b <span class="fu">|</span> b <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span>  b]</code></pre></div>
+<p>Magyarázat:</p>
+<ul>
+<li><code>f(x, y)</code> helyett <code>f x y</code></li>
+<li><code>f x + y</code> jelentése <code>f(x) + y</code> (függvényalkalmazás kötési erőssége a legnagyobb)</li>
+<li>függvény-definíció: <code>sqr x = x * x</code></li>
+<li>mintaillesztés</li>
+<li>listák:
+<ul>
+<li><code>[]</code></li>
+<li><code>1 : []</code></li>
+<li><code>1 : (2 : (3 : []))</code></li>
+<li><code>[1, 2, 3]</code></li>
+<li><code>[1..3]</code></li>
+<li><code>[a | a &lt;- [1..], a &lt;= 3]</code> jelentése <code>{ a : a ∈ ℕ, a ≤ 3}</code></li>
+<li>infix operátorok: <code>++</code>, <code>&lt;=</code>, <code>&lt;</code></li>
+<li><code>[1,2,3] ++ [3,4,5]</code> eredménye <code>[1,2,3,4,5]</code></li>
+</ul></li>
+<li>függvény-nevek kisbetűvel kezdődnek.</li>
+<li>csoportosítás (begin-end) behúzásokkal</li>
+</ul>
+</div>
+<div id="lista-kezelő-függvények" class="slide section level1">
+<h1>Lista-kezelő függvények</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">F</span>üggvényhívás         <span class="dt">Eredm</span>ény
+<span class="fu">-----------------------------------</span>
+head [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]      <span class="dv">1</span>
+tail [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]      [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]
+[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] <span class="fu">!!</span> <span class="dv">2</span>      <span class="dv">3</span>              (infix)
+take <span class="dv">3</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]    [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]
+drop <span class="dv">3</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]    [<span class="dv">4</span>,<span class="dv">5</span>]
+length [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]    <span class="dv">5</span>
+[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] <span class="fu">++</span> [<span class="dv">4</span>,<span class="dv">5</span>]      [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]    (infix)
+reverse [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]   [<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>]
+sum [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]       <span class="dv">15</span>
+product [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]   <span class="dv">120</span></code></pre></div>
+<p>Példák a használatukra:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">factorial n <span class="fu">=</span> product [<span class="dv">1</span><span class="fu">..</span>n]
+average ns <span class="fu">=</span> sum ns <span class="ot">`div`</span> length ns</code></pre></div>
+<p>Feladatok:</p>
+<ul>
+<li><code>last</code> definiálása a fentiekkel: lista utolsó eleme</li>
+<li><code>init</code> definiálása a fentiekkel: lista utolsó elemén kívül a többi</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">last ns <span class="fu">=</span> head (reverse ns)
+last ns <span class="fu">=</span> ns <span class="fu">!!</span> (length ns <span class="fu">-</span> <span class="dv">1</span>)
+
+init ns <span class="fu">=</span> take (length ns <span class="fu">-</span> <span class="dv">1</span>) ns
+init ns <span class="fu">=</span> reverse (tail (reverse ns))
+
+(f <span class="fu">.</span> g) x <span class="fu">=</span> f (g x)
+last <span class="fu">=</span> head <span class="fu">.</span> reverse
+init <span class="fu">=</span> reverse <span class="fu">.</span> tail <span class="fu">.</span> reverse</code></pre></div>
+</div>
+<div id="kifejezés-kiértékelése" class="slide section level1">
+<h1>Kifejezés kiértékelése</h1>
+<p>Ez történik futási időben:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">take<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+take n xs <span class="fu">|</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="fu">=</span> []                   <span class="co">-- (A)</span>
+take n []          <span class="fu">=</span> []                   <span class="co">-- (B)</span>
+take n (x<span class="fu">:</span>xs)      <span class="fu">=</span> x <span class="fu">:</span> take (n <span class="fu">-</span> <span class="dv">1</span>) xs  <span class="co">-- (C)</span>
+
+take <span class="dv">3</span> (<span class="dv">1</span><span class="fu">:</span><span class="dv">2</span><span class="fu">:</span><span class="dv">3</span><span class="fu">:</span><span class="dv">4</span><span class="fu">:</span><span class="dv">5</span><span class="fu">:</span>[])     <span class="co">-- [1,2,3,4,5]</span>
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">2</span> (<span class="dv">2</span><span class="fu">:</span><span class="dv">3</span><span class="fu">:</span><span class="dv">4</span><span class="fu">:</span><span class="dv">5</span><span class="fu">:</span>[])
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> <span class="dv">2</span> <span class="fu">:</span> take <span class="dv">1</span> (<span class="dv">3</span><span class="fu">:</span><span class="dv">4</span><span class="fu">:</span><span class="dv">5</span><span class="fu">:</span>[])
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> <span class="dv">2</span> <span class="fu">:</span> <span class="dv">3</span> <span class="fu">:</span> take <span class="dv">0</span> (<span class="dv">4</span><span class="fu">:</span><span class="dv">5</span><span class="fu">:</span>[])
+<span class="fu">~&gt;</span> (<span class="dt">A</span>)
+<span class="dv">1</span> <span class="fu">:</span> <span class="dv">2</span> <span class="fu">:</span> <span class="dv">3</span> <span class="fu">:</span> []           <span class="co">-- [1,2,3]</span>
+
+take <span class="dv">3</span> (<span class="dv">1</span><span class="fu">:</span>[])     <span class="co">-- [1]</span>
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">2</span> []
+<span class="fu">~&gt;</span> (<span class="dt">B</span>)
+<span class="dv">1</span> <span class="fu">:</span> []            <span class="co">-- [1]</span></code></pre></div>
+<p>A Church-féle lambda-kalkulusban béta-redukciónak hívjuk.</p>
+</div>
+<div id="haskell-fő-tulajdonságai" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li>statikus, polimorf típusok</li>
+<li>tiszta</li>
+<li>lusta</li>
+</ul>
+</div>
+<div id="haskell-fő-tulajdonságai-1" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li><i>statikus, polimorf típusok</i></li>
+<li>tiszta</li>
+<li>lusta</li>
+</ul>
+</div>
+<div id="típusok-16-egyszerű-típusok" class="slide section level1">
+<h1>Típusok (1/6): egyszerű típusok</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">True</span><span class="ot">  ::</span> <span class="dt">Bool</span>
+<span class="dt">False</span><span class="ot"> ::</span> <span class="dt">Bool</span>
+<span class="ch">&#39;a&#39;</span><span class="ot">   ::</span> <span class="dt">Char</span>
+<span class="dv">1</span><span class="ot">     ::</span> <span class="dt">Integer</span>
+<span class="fl">1.1</span><span class="ot">   ::</span> <span class="dt">Double</span>
+
+<span class="fu">&gt;</span> <span class="dv">1</span> <span class="fu">+</span> <span class="dt">False</span>
+<span class="dt">ERROR</span></code></pre></div>
+</div>
+<div id="típusok-26-listák" class="slide section level1">
+<h1>Típusok (2/6): listák</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="dt">False</span>, <span class="dt">True</span>, <span class="dt">False</span>]<span class="ot"> ::</span> [<span class="dt">Bool</span>]
+[’a’,’b’,’c’,’d’]<span class="ot">    ::</span> [<span class="dt">Char</span>]</code></pre></div>
+<p>A hossz nem számít:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="dt">False</span>, <span class="dt">True</span>]<span class="ot"> ::</span> [<span class="dt">Bool</span>]</code></pre></div>
+<p>Tetszőleges típusú listák hozhatók létre:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[[’a’],[’b’,’c’]]<span class="ot"> ::</span> [[<span class="dt">Char</span>]]</code></pre></div>
+</div>
+<div id="típusok-36-rendezett-n-esek" class="slide section level1">
+<h1>Típusok (3/6): rendezett n-esek</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dt">False</span>,<span class="dt">True</span>)<span class="ot">     ::</span> (<span class="dt">Bool</span>,<span class="dt">Bool</span>)
+(<span class="dt">False</span>,’a’,<span class="dt">True</span>)<span class="ot"> ::</span> (<span class="dt">Bool</span>,<span class="dt">Char</span>,<span class="dt">Bool</span>)</code></pre></div>
+<p>A hossz számít:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dt">False</span>,<span class="dt">True</span>)<span class="ot">       ::</span> (<span class="dt">Bool</span>,<span class="dt">Bool</span>)
+(<span class="dt">False</span>,<span class="dt">True</span>,<span class="dt">False</span>)<span class="ot"> ::</span> (<span class="dt">Bool</span>,<span class="dt">Bool</span>,<span class="dt">Bool</span>)</code></pre></div>
+<p>Tetszőleges típusú n-esek hozhatók létre:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(’a’,(<span class="dt">False</span>,’b’))<span class="ot"> ::</span> (<span class="dt">Char</span>,(<span class="dt">Bool</span>,<span class="dt">Char</span>))
+(<span class="dt">True</span>,[’a’,’b’])<span class="ot">  ::</span> (<span class="dt">Bool</span>,[<span class="dt">Char</span>])</code></pre></div>
+</div>
+<div id="típusok-46-függvények-polimorf-típusok" class="slide section level1">
+<h1>Típusok (4/6): függvények, polimorf típusok</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">not<span class="ot"> ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+
+<span class="ot">add ::</span> (<span class="dt">Int</span>,<span class="dt">Int</span>) <span class="ot">-&gt;</span> <span class="dt">Int</span>
+add (a,b) <span class="fu">=</span> a <span class="fu">+</span> b
+
+<span class="ot">add&#39; ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>)
+add&#39; a b <span class="fu">=</span> a <span class="fu">+</span> b
+
+sum<span class="ot">  ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></code></pre></div>
+<p>Polimorf típusok:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">id<span class="ot">     ::</span> a <span class="ot">-&gt;</span> a
+const<span class="ot">  ::</span> a <span class="ot">-&gt;</span> b <span class="ot">-&gt;</span> a
+head<span class="ot">   ::</span> [a] <span class="ot">-&gt;</span> a
+length<span class="ot"> ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span>
+fst<span class="ot">    ::</span> (a,b) <span class="ot">-&gt;</span> a</code></pre></div>
+<p>Magasabbrendű függvények:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">map<span class="ot">    ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [b]
+filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</code></pre></div>
+</div>
+<div id="típusok-56-ad-hoc-polimorfizmus-problémája" class="slide section level1">
+<h1>Típusok (5/6): ad-hoc polimorfizmus problémája</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">member ::</span> a <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+sort<span class="ot">   ::</span> [a] <span class="ot">-&gt;</span> [a]
+show<span class="ot">   ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span>
+
+<span class="ot">(+)    ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">(*)    ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+<span class="ot">(/)    ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a
+sqrt<span class="ot">   ::</span> a <span class="ot">-&gt;</span> a</code></pre></div>
+</div>
+<div id="típusok-66-megoldás-típusosztályok" class="slide section level1">
+<h1>Típusok (6/6): megoldás: típusosztályok</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">member ::</span>         a <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+<span class="ot">member ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+
+<span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span>
+<span class="ot">  (==) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+
+<span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Bool</span> <span class="kw">where</span>
+  <span class="dt">True</span>  <span class="fu">==</span> <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">True</span>
+  <span class="dt">False</span> <span class="fu">==</span> <span class="dt">False</span> <span class="fu">=</span> <span class="dt">True</span>
+  _     <span class="fu">==</span> _     <span class="fu">=</span> <span class="dt">False</span>
+
+sort<span class="ot"> ::</span>          [a] <span class="ot">-&gt;</span> [a]
+sort<span class="ot"> ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+
+<span class="ot">sqr  ::</span>          a <span class="ot">-&gt;</span> a
+<span class="ot">sqr  ::</span> <span class="dt">Num</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a</code></pre></div>
+<p>Ez volt a Haskell legnagyobb újdonsága a Mirandához, ML-hez képest.</p>
+</div>
+<div id="haskell-fő-tulajdonságai-2" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li>statikus, polimorf típusok</li>
+<li><i>tiszta</i></li>
+<li>lusta</li>
+</ul>
+</div>
+<div id="tisztaság-mellékhatás-mentesség-12" class="slide section level1">
+<h1>Tisztaság (mellékhatás-mentesség) (1/2)</h1>
+<p>Mit csinálhatnak az alábbi függvények?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">f ::</span> a <span class="ot">-&gt;</span> a
+<span class="ot">g ::</span> [a] <span class="ot">-&gt;</span> [a]
+<span class="ot">h ::</span> [a] <span class="ot">-&gt;</span> a
+<span class="ot">i ::</span> (a,b) <span class="ot">-&gt;</span> b
+<span class="ot">j ::</span> a <span class="ot">-&gt;</span> b</code></pre></div>
+</div>
+<div id="tisztaság-mellékhatás-mentesség-22" class="slide section level1">
+<h1>Tisztaság (mellékhatás-mentesség) (2/2)</h1>
+<div class="figure">
+<img src="http://akaposi.bitbucket.org/haskell/spj-abra.png" alt="Nirvana elérése" />
+<p class="caption">Nirvana elérése</p>
+</div>
+<p>--</p>
+<p>Simon-Peyton Jones ábrája <a href="http://yow.eventer.com/events/1004/talks/1054">innen</a></p>
+</div>
+<div id="haskell-fő-tulajdonságai-3" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li>statikus, polimorf típusok</li>
+<li>tiszta</li>
+<li><i>lusta</i></li>
+</ul>
+</div>
+<div id="lustaság" class="slide section level1">
+<h1>Lustaság</h1>
+<ul>
+<li><p>többféle kiértékelési lehetőség:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> <span class="dt">True</span> <span class="kw">then</span> <span class="dv">3</span><span class="fu">+</span><span class="dv">4</span> <span class="kw">else</span> <span class="dv">6</span><span class="fu">+</span><span class="dv">12</span> <span class="fu">~&gt;</span> <span class="dv">3</span><span class="fu">+</span><span class="dv">4</span> <span class="fu">~&gt;</span> <span class="dv">7</span>
+
+<span class="kw">if</span> <span class="dt">True</span> <span class="kw">then</span> <span class="dv">3</span><span class="fu">+</span><span class="dv">4</span> <span class="kw">else</span> <span class="dv">6</span><span class="fu">+</span><span class="dv">12</span> <span class="fu">~&gt;</span> <span class="kw">if</span> <span class="dt">True</span> <span class="kw">then</span> <span class="dv">7</span> <span class="kw">else</span> <span class="dv">18</span> <span class="fu">~&gt;</span> <span class="dv">7</span></code></pre></div></li>
+<li><p>lusta kiértékelés: minden maximum 1x számolódik ki</p></li>
+<li><p>végtelen adatsorok nem okoznak gondot</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">&gt;</span> ones <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> ones
+<span class="fu">&gt;</span> take <span class="dv">5</span> ones
+[<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>]
+
+take <span class="dv">5</span>    ones
+\____<span class="fu">/</span>    \___<span class="fu">/</span>
+   <span class="fu">|</span>        <span class="fu">|</span>
+vezérlés  adat</code></pre></div></li>
+</ul>
+<p>Az alábbi számítás <code>O(n)</code> futási idejű:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">min <span class="fu">=</span> head <span class="fu">.</span> sort         <span class="co">-- típusa?</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">min<span class="ot"> ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a</code></pre></div>
+</div>
+<div id="kifejezés-kiértékelése-lustán" class="slide section level1">
+<h1>Kifejezés kiértékelése (lustán)</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">take<span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+take n xs <span class="fu">|</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="fu">=</span> []                   <span class="co">-- (A)</span>
+take n []          <span class="fu">=</span> []                   <span class="co">-- (B)</span>
+take n (x<span class="fu">:</span>xs)      <span class="fu">=</span> x <span class="fu">:</span> take (n <span class="fu">-</span> <span class="dv">1</span>) xs  <span class="co">-- (C)</span>
+
+<span class="ot">ones ::</span> 
+ones <span class="fu">=</span> <span class="dv">1</span> <span class="fu">:</span> ones                           <span class="co">-- (D)</span>
+
+
+take <span class="dv">3</span> ones
+<span class="fu">~&gt;</span> (<span class="dt">D</span>) (szükség van rá, hogy az (<span class="dt">A</span>)<span class="fu">-</span>(<span class="dt">B</span>)<span class="fu">-</span>(<span class="dt">C</span>) esetszétválasztás megtörténhessen)
+take <span class="dv">3</span> (<span class="dv">1</span> <span class="fu">:</span> ones)
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">2</span> ones
+<span class="fu">~&gt;</span> (<span class="dt">D</span>)
+<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">2</span> (<span class="dv">1</span> <span class="fu">:</span> ones)
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">1</span> ones)
+<span class="fu">~&gt;</span> (<span class="dt">D</span>)
+<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">1</span> (<span class="dv">1</span> <span class="fu">:</span> ones))
+<span class="fu">~&gt;</span> (<span class="dt">C</span>)
+<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> take <span class="dv">0</span> ones))
+<span class="fu">~&gt;</span> (<span class="dt">A</span>)
+<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> (<span class="dv">1</span> <span class="fu">:</span> []))</code></pre></div>
+</div>
+<div id="haskell-fő-tulajdonságai-4" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li>statikus, polimorf típusok (Hindley-Milner típusrendszer)</li>
+<li>tiszta (a függvények mellékhatás-mentesek)</li>
+<li>lusta kiértékelés (csak akkor értékelünk ki, ha szükség van rá)</li>
+</ul>
+<p>Egy Haskell program emiatt:</p>
+<ol style="list-style-type: decimal">
+<li>TÖMÖR: új absztrakciós eszközök a magasabbrendű függvények, végtelen adatszerkezetek, adat-vezérlés elválasztás, generikus programozás; karbantarthatóság</li>
+<li>HATÉKONY: párhuzamosíthatók a számítások (tiszta), ill. csak a mindenképp szükséges számításokat végezzük el (lusta, pl. <code>min xs = head . sort $ xs</code> O(n) futási idejű)</li>
+<li>BIZTONSÁGOS: a típus elárulja, mit csinál a függvény, mást nem csinálhat (tisztaság, pl. <code>f :: a -&gt; a</code>), könnyű tesztelni, érthetőbb a program</li>
+</ol>
+</div>
+<div id="tömör" class="slide section level1">
+<h1>TÖMÖR</h1>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="dt">void</span> qsort (T *result, T *list, <span class="dt">int</span> n)
+{
+    <span class="kw">if</span> (n == <span class="dv">0</span>) <span class="kw">return</span>;
+    T *smallerList, *largerList;
+    smallerList = <span class="kw">new</span> T[n];
+    largerList = <span class="kw">new</span> T[n];      
+    T pivot = list[<span class="dv">0</span>];
+    <span class="dt">int</span> numSmaller=<span class="dv">0</span>, numLarger=<span class="dv">0</span>;      
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; n; i++)
+        <span class="kw">if</span> (list[i] &lt; pivot)
+            smallerList[numSmaller++] = list[i];
+        <span class="kw">else</span> 
+            largerList[numLarger++] = list[i];
+    
+    qsort(smallerList,smallerList,numSmaller); 
+    qsort(largerList,largerList,numLarger);
+    
+    <span class="dt">int</span> pos = <span class="dv">0</span>;        
+    <span class="kw">for</span> ( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; numSmaller; i++)
+        result[pos++] = smallerList[i];
+    
+    result[pos++] = pivot;
+    
+    <span class="kw">for</span> ( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; numLarger; i++)
+        result[pos++] = largerList[i];
+    
+    <span class="kw">delete</span> [] smallerList;
+    <span class="kw">delete</span> [] largerList;
+};</code></pre></div>
+</div>
+<div id="tömör-absztrakciós-eszközök" class="slide section level1">
+<h1>TÖMÖR (absztrakciós eszközök)</h1>
+<p>Magasabbrendű függvények:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">numOf p xs <span class="fu">=</span> length (filter p xs)
+
+numOfEven xs <span class="fu">=</span> numOf even xs
+
+numOfGE5 xs <span class="fu">=</span> numOf (<span class="fu">&gt;=</span><span class="dv">5</span>) xs</code></pre></div>
+</div>
+<div id="hatékony" class="slide section level1">
+<h1>HATÉKONY</h1>
+<p>A tisztaság miatt nagyon egyszerűen párhuzamosítható:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">qs ::</span> [<span class="dt">Float</span>] <span class="ot">-&gt;</span> [<span class="dt">Float</span>]
+qs []     <span class="fu">=</span> []
+qs (x<span class="fu">:</span>xs) <span class="fu">=</span> qs as <span class="fu">++</span> [x] <span class="fu">++</span> qs bs
+  <span class="kw">where</span>
+    as <span class="fu">=</span> [a <span class="fu">|</span> a <span class="ot">&lt;-</span> xs, a <span class="fu">&lt;=</span> x]
+    bs <span class="fu">=</span> [b <span class="fu">|</span> b <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span>  b]</code></pre></div>
+</div>
+<div id="hatékony-1" class="slide section level1">
+<h1>HATÉKONY</h1>
+<p>A tisztaság miatt nagyon egyszerűen párhuzamosítható:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">qs ::</span> [<span class="dt">Float</span>] <span class="ot">-&gt;</span> [<span class="dt">Float</span>]
+qs []     <span class="fu">=</span> []
+qs (x<span class="fu">:</span>xs) <span class="fu">=</span> qs as <span class="fu">++</span> [x] <span class="fu">++</span> qs bs
+  <span class="kw">where</span>
+    as <span class="fu">=</span> [a <span class="fu">|</span> a <span class="ot">&lt;-</span> xs, a <span class="fu">&lt;=</span> x] <span class="ot">`using`</span> rpar
+    bs <span class="fu">=</span> [b <span class="fu">|</span> b <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span>  b] <span class="ot">`using`</span> rpar</code></pre></div>
+</div>
+<div id="biztonságos" class="slide section level1">
+<h1>BIZTONSÁGOS</h1>
+<p>Egyenlőségi érvelés (gimnázium: <code>(x+a)*(x+b) = ... = x*x + x*b + a*x + a*b</code>)</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(++) ::</span> [a] <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+[]     <span class="fu">++</span> ys <span class="fu">=</span> ys              <span class="co">-- (A)</span>
+(x<span class="fu">:</span>xs) <span class="fu">++</span> ys <span class="fu">=</span> x <span class="fu">:</span> (xs <span class="fu">++</span> ys)  <span class="co">-- (B)</span></code></pre></div>
+<p>Bal oldalt helyettesíthetjük mindig a jobb oldallal és fordítva.</p>
+<p>A következőt szeretnénk bizonyítani:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">as <span class="fu">++</span> (bs <span class="fu">++</span> cs) ≡ (as <span class="fu">++</span> bs) <span class="fu">++</span> cs</code></pre></div>
+</div>
+<div id="biztonságos-1" class="slide section level1">
+<h1>BIZTONSÁGOS</h1>
+<p>Egyenlőségi érvelés (gimnázium: <code>(x+a)*(x+b) = ... = x*x + x*b + a*x + a*b</code>)</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">(++) ::</span> [a] <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+[]     <span class="fu">++</span> ys <span class="fu">=</span> ys              <span class="co">-- (A)</span>
+(x<span class="fu">:</span>xs) <span class="fu">++</span> ys <span class="fu">=</span> x <span class="fu">:</span> (xs <span class="fu">++</span> ys)  <span class="co">-- (B)</span></code></pre></div>
+<p>Bal oldalt helyettesíthetjük mindig a jobb oldallal és fordítva.</p>
+<p>A következőt szeretnénk bizonyítani:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">as <span class="fu">++</span> (bs <span class="fu">++</span> cs) ≡ (as <span class="fu">++</span> bs) <span class="fu">++</span> cs</code></pre></div>
+<p>Teljes indukció <code>as</code> mérete szerint. Alapeset:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[] <span class="fu">++</span> (bs <span class="fu">++</span> cs)
+≡  (<span class="dt">A</span>)<span class="fu">&gt;</span>
+bs <span class="fu">++</span> cs
+≡ <span class="fu">&lt;</span>(<span class="dt">A</span>)
+([] <span class="fu">++</span> bs) <span class="fu">++</span> cs</code></pre></div>
+<p>Induktív eset:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(a<span class="fu">:</span>as) <span class="fu">++</span> (bs <span class="fu">++</span> cs) 
+≡  (<span class="dt">B</span>)<span class="fu">&gt;</span>
+a <span class="fu">:</span> (as <span class="fu">++</span> (bs <span class="fu">++</span> cs))
+≡ (indukciós feltevés)
+a <span class="fu">:</span> ((as <span class="fu">++</span> bs) <span class="fu">++</span> cs)
+≡ <span class="fu">&lt;</span>(<span class="dt">B</span>)
+((a <span class="fu">:</span> (as <span class="fu">++</span> bs)) <span class="fu">++</span> cs)
+≡ <span class="fu">&lt;</span>(<span class="dt">B</span>)
+(((a<span class="fu">:</span>as) <span class="fu">++</span> bs) <span class="fu">++</span> cs)</code></pre></div>
+</div>
+<div id="haskell-fő-tulajdonságai-5" class="slide section level1">
+<h1>Haskell fő tulajdonságai</h1>
+<ul>
+<li><code>statikus, polimorf típusok</code> (típusrendszer)</li>
+<li>tiszta</li>
+<li>lusta</li>
+</ul>
+<p>Programok helyességének biztosítása:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Módszer</th>
+<th align="left">Példa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">tesztelés</td>
+<td align="left">Java JUnit framework</td>
+</tr>
+<tr class="even">
+<td align="left">futásidejű monitorozás</td>
+<td align="left"><code>Exception in thread &quot;main&quot; java.lang.ArrayIndexOutOfBoundsException</code></td>
+</tr>
+<tr class="odd">
+<td align="left">modell-ellenőrzés</td>
+<td align="left">NuSMV</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><code>state : {ready, busy}, request : boolean</code></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><code>init(state) := ready</code></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><code>next(state) := if state = ready &amp; request = TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><code>then busy else {ready, busy}</code></td>
+</tr>
+<tr class="even">
+<td align="left">típusrendszerek</td>
+<td align="left"><code>4 :: Int</code></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><code>[1,2,4] :: List Int</code></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><code>(+) 4 :: Int -&gt; Int</code></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><code>(+) :: Num a =&gt; a -&gt; a -&gt; a</code></td>
+</tr>
+<tr class="even">
+<td align="left">formális ellenőrzés</td>
+<td align="left">B módszer (metró), Hoare-logika, Isabelle, Coq</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="típusrendszer-kifejező-ereje" class="slide section level1">
+<h1>Típusrendszer kifejező ereje</h1>
+<p>Haskellben megadható a négyzetes mátrixok típusa (de bonyolult)</p>
+<p>Az alábbi típusok már nem:</p>
+<ul>
+<li>fix-hosszú listák (tömbből ne lehessen kiindexelni)</li>
+<li>rendezett listák</li>
+<li>kiegyensúlyozott fák, AVL-fák, B-fák</li>
+<li>13 és 45 közötti számok</li>
+</ul>
+<p>A típusrendszer erősíthető úgy, hogy ezek is kifejezhetők legyenek. Pl. Agda.</p>
+</div>
+<div id="feladatok" class="slide section level1">
+<h1>Feladatok</h1>
+<ul>
+<li><a href="http://lambda.inf.elte.hu/fp/NyariEgyetem2015.xml">Grafika Haskellben</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Middle2.xml">Számológép</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Middle3.xml">Egyenletrendszerek</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Lists.xml">Listák</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Comprehensions.xml">Halmazkifejezések</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Recursion.xml">Rekurzió</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/Composition.xml">Függvénykompozíció</a></li>
+<li><a href="http://lambda.inf.elte.hu/fp/ByFunctions.xml">További függvények</a></li>
+<li>Logika</li>
+</ul>
+</div>
+<div id="források" class="slide section level1">
+<h1>Források</h1>
+<p>A példák egy része innen származik:</p>
+<ul>
+<li>Graham Hutton Haskell <a href="http://www.cs.nott.ac.uk/~gmh/book.html#slides">előadásai</a></li>
+<li>Simon-Peyton Jones <a href="http://yow.eventer.com/events/1004/talks/1054">előadása</a> a Haskell történetéről</li>
+</ul>
+</div>
+<div id="további-információ" class="slide section level1">
+<h1>További információ</h1>
+<ul>
+<li>ELTE funkcionális programozás tananyagok: <a href="http://pnyf.inf.elte.hu/fp" class="uri">http://pnyf.inf.elte.hu/fp</a></li>
+<li><a href="http://www.haskell.org" class="uri">http://www.haskell.org</a></li>
+</ul>
+<p>Ha Haskellről akarsz tanulni vagy ezekkel kapcsolatos kutatásokba bekapcsolódni, ajánlom a következő (angol nyelvű) nyári iskolákat:</p>
+<ul>
+<li><a href="http://plc.inf.elte.hu/cefp/">CEFP (Central European Functional Programming Summer School)</a></li>
+<li><a href="http://www.utrechtsummerschool.nl/index.php?type=courses&amp;code=H9">Utrecht Haskell Summer School</a></li>
+<li><a href="http://www.google.hu/search?q=mgs+midlands+graduate+school">MGS (Midlands Graduate School)</a></li>
+<li><a href="https://www.cs.uoregon.edu/research/summerschool">OPLSS (Oregon Programming Language Summer School)</a></li>
+</ul>
+<p>Érdemes még feliratkozni a <a href="http://www.haskell.org/mailman/listinfo/haskell">Haskell-Announce</a> levelező listára, ahol hasonló alkalmakról naprakész értesítést kapsz.</p>
+</div>
+</body>
+</html>
