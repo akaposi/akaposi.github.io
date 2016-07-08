@@ -201,7 +201,7 @@ Mi a helyzet a következővel?
 További információk
 ================================
 
-Feladatok forrása: Thorsten Altenkirch IFR tantárgya
+Feladatok forrása: Thorsten Altenkirch
 
 Ha érdekel a programozás és a logika kapcsolata, a következő helyeken
 lehet információt találni:
