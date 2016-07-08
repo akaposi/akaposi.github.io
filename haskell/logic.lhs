@@ -146,7 +146,7 @@ Tagadás (logikai nem) és ekvivalencia (akkor és csak akkor)
 > type p :<-> q = ((p -> q), (q -> p))
 
 > li :: (b :\/ a) :<-> (a :\/ b)
-> li = undefined
+> li = (either Right Left, either Right Left)
 
 
 Feladatok
