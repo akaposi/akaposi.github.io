@@ -1,6 +1,6 @@
 % ELTE Nyári Egyetem, Informatika: Haskell
 % Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté
-% 2016.07.07
+% 2016.07.08
 
 Funkcionális programozási stílus
 ================================

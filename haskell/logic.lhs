@@ -1,6 +1,6 @@
 % ELTE Nyári Egyetem, Informatika: Logika Haskellben
 % Kaposi Ambrus
-% 2016.07.07
+% 2016.07.08
 
 
 Programozás és logika
