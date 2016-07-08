@@ -1,5 +1,5 @@
 % ELTE Nyári Egyetem, Informatika: Logika Haskellben
-% Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté
+% Kaposi Ambrus
 % 2016.07.07
 
 
