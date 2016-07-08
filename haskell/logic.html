@@ -101,9 +101,9 @@ lb&#39; <span class="fu">=</span> undefined</code></pre></div>
 <span class="ot">fromFalse ::</span> <span class="dt">False</span> <span class="ot">-&gt;</span> a
 fromFalse f <span class="fu">=</span> f</code></pre></div>
 <p>Használata</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">  h ::</span> <span class="dt">False</span>
-<span class="fu">--------------</span>
-<span class="ot">fromFalse ::</span> p</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">   h ::</span> <span class="dt">False</span>
+<span class="fu">----------------</span>
+fromFalse<span class="ot"> h ::</span> p</code></pre></div>
 <p>Pl.</p>
 <div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">lc ::</span> (p <span class="ot">-&gt;</span> <span class="dt">False</span>) <span class="ot">-&gt;</span> p <span class="ot">-&gt;</span> q
 lc f g <span class="fu">=</span> fromFalse (f g)</code></pre></div>

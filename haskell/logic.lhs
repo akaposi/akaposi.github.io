@@ -70,9 +70,9 @@ Logikai hamis
 
 Használata
           
-      h :: False
-    --------------
-    fromFalse :: p
+       h :: False
+    ----------------
+    fromFalse h :: p
 
 Pl.
 
