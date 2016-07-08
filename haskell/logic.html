@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté" />
+  <title>ELTE Nyári Egyetem, Informatika: Logika Haskellben</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">ELTE Nyári Egyetem, Informatika: Logika Haskellben</h1>
+  <p class="author">
+Kaposi Ambrus, Diviánszky Péter, Kovács András, Kovács Máté
+  </p>
+  <p class="date">2016.07.07</p>
+</div>
+<div id="programozás-és-logika" class="slide section level1">
+<h1>Programozás és logika</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">{-# language TypeOperators, RankNTypes, LiberalTypeSynonyms, ImpredicativeTypes #-}</span></code></pre></div>
+<p>állítás = típus</p>
+<p>bizonyítás = típusnak megfelelő program</p>
+<p>Pl.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">f ::</span> p <span class="ot">-&gt;</span> q</code></pre></div>
+<p>Állítás: <code>p</code>-ből következik <code>q</code></p>
+<p>Bizonyítás: <code>f</code></p>
+</div>
+<div id="implikáció-következtetés" class="slide section level1">
+<h1>Implikáció (következtetés)</h1>
+<p>Bizonyítása:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">h ::</span> q, feltéve, hogy<span class="ot"> f ::</span> p
+<span class="fu">----------------------------</span>
+     \f <span class="ot">-&gt; h ::</span> p <span class="ot">-&gt;</span> q</code></pre></div>
+<p>Használata:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">h ::</span> p <span class="ot">-&gt;</span> q<span class="ot">     f ::</span> p
+<span class="fu">----------------------</span>
+      h<span class="ot"> f ::</span> q</code></pre></div>
+<p>Pl.</p>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">la ::</span> p <span class="ot">-&gt;</span> p
+la <span class="fu">=</span> \h <span class="ot">-&gt;</span> h
+
+<span class="ot">lb ::</span> p <span class="ot">-&gt;</span> q <span class="ot">-&gt;</span> p
+lb <span class="fu">=</span> \f g <span class="ot">-&gt;</span> f</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">lb&#39; ::</span> (p <span class="ot">-&gt;</span> q) <span class="ot">-&gt;</span> p
+lb&#39; <span class="fu">=</span> undefined</code></pre></div>
+</div>
+<div id="logikai-igaz" class="slide section level1">
+<h1>Logikai igaz</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">True</span> <span class="fu">=</span> ()</code></pre></div>
+<p>Bizonyítása</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">() ::</span> <span class="dt">True</span></code></pre></div>
+</div>
+<div id="logikai-hamis" class="slide section level1">
+<h1>Logikai hamis</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">False</span> <span class="fu">=</span> forall p <span class="fu">.</span> p
+
+<span class="ot">fromFalse ::</span> <span class="dt">False</span> <span class="ot">-&gt;</span> a
+fromFalse f <span class="fu">=</span> f</code></pre></div>
+<p>Használata</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">  h ::</span> <span class="dt">False</span>
+<span class="fu">--------------</span>
+<span class="ot">fromFalse ::</span> p</code></pre></div>
+<p>Pl.</p>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">lc ::</span> (p <span class="ot">-&gt;</span> <span class="dt">False</span>) <span class="ot">-&gt;</span> p <span class="ot">-&gt;</span> q
+lc f g <span class="fu">=</span> fromFalse (f g)</code></pre></div>
+</div>
+<div id="konjunkció-logikai-és" class="slide section level1">
+<h1>Konjunkció (logikai és)</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> p <span class="fu">:/</span>\ q <span class="fu">=</span> (p, q)</code></pre></div>
+<p>Bizonyítása</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">h ::</span> p<span class="ot">     f ::</span> q
+<span class="fu">-----------------</span>
+(h, f)<span class="ot"> ::</span> p <span class="fu">:/</span>\ q</code></pre></div>
+<p>Használata</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">h ::</span> p <span class="fu">:/</span>\ q<span class="ot">   h ::</span> p <span class="fu">:/</span>\ q
+<span class="fu">------------</span>   <span class="fu">------------</span>
+ fst<span class="ot"> h ::</span> p     snd<span class="ot"> h ::</span> q</code></pre></div>
+<p>Példák</p>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">ld ::</span> ((p <span class="ot">-&gt;</span> q) <span class="fu">:/</span>\ (q <span class="ot">-&gt;</span> r)) <span class="ot">-&gt;</span> (p <span class="ot">-&gt;</span> r)
+ld <span class="fu">=</span> \h <span class="ot">-&gt;</span> \f <span class="ot">-&gt;</span> (snd h (fst h f))
+
+<span class="ot">le ::</span> ((p <span class="fu">:/</span>\ q) <span class="fu">:/</span>\ r) <span class="ot">-&gt;</span> (p <span class="fu">:/</span>\ (q <span class="fu">:/</span>\ r))
+le <span class="fu">=</span> \h <span class="ot">-&gt;</span> (fst (fst h), (snd (fst h), snd h))</code></pre></div>
+</div>
+<div id="diszjunkció-logikai-vagy" class="slide section level1">
+<h1>Diszjunkció (logikai vagy)</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> p <span class="fu">:</span>\<span class="fu">/</span> q <span class="fu">=</span> <span class="dt">Either</span> p q</code></pre></div>
+<p>Bizonyítása</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">      h ::</span> p<span class="ot">             h ::</span> q     
+<span class="fu">-----------------</span>  <span class="fu">------------------</span>
+<span class="dt">Left</span><span class="ot"> h ::</span> p <span class="fu">:</span>\<span class="fu">/</span> q  <span class="dt">Right</span><span class="ot"> h ::</span> p <span class="fu">:</span>\<span class="fu">/</span> q</code></pre></div>
+<p>Használata</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">h ::</span> p <span class="ot">-&gt;</span> r<span class="ot">    f ::</span> q <span class="ot">-&gt;</span> r
+<span class="fu">--------------------------</span>
+either h<span class="ot"> f ::</span> p <span class="fu">:</span>\<span class="fu">/</span> q <span class="ot">-&gt;</span> r</code></pre></div>
+<p>Pl.</p>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">lf ::</span> (p <span class="fu">:/</span>\ q) <span class="fu">:</span>\<span class="fu">/</span> r <span class="ot">-&gt;</span> (p <span class="fu">:</span>\<span class="fu">/</span> r) <span class="fu">:/</span>\ (q <span class="fu">:</span>\<span class="fu">/</span> r)
+lf (<span class="dt">Left</span> (f, h)) <span class="fu">=</span> (<span class="dt">Left</span> f, <span class="dt">Left</span> h)
+lf (<span class="dt">Right</span> f) <span class="fu">=</span> (<span class="dt">Right</span> f, <span class="dt">Right</span> f)
+
+<span class="ot">lg ::</span> q <span class="fu">:</span>\<span class="fu">/</span> q <span class="ot">-&gt;</span> q
+lg (<span class="dt">Left</span> f) <span class="fu">=</span> f
+lg (<span class="dt">Right</span> f) <span class="fu">=</span> f</code></pre></div>
+</div>
+<div id="tagadás-logikai-nem-és-ekvivalencia-akkor-és-csak-akkor" class="slide section level1">
+<h1>Tagadás (logikai nem) és ekvivalencia (akkor és csak akkor)</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Not</span> p <span class="fu">=</span> p <span class="ot">-&gt;</span> <span class="dt">False</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">lh ::</span> <span class="dt">Not</span> (p <span class="fu">:/</span>\ <span class="dt">Not</span> p)
+lh <span class="fu">=</span> \(p, np) <span class="ot">-&gt;</span> np p</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="kw">type</span> p <span class="fu">:&lt;-&gt;</span> q <span class="fu">=</span> ((p <span class="ot">-&gt;</span> q), (q <span class="ot">-&gt;</span> p))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">li ::</span> (b <span class="fu">:</span>\<span class="fu">/</span> a) <span class="fu">:&lt;-&gt;</span> (a <span class="fu">:</span>\<span class="fu">/</span> b)
+li <span class="fu">=</span> undefined</code></pre></div>
+</div>
+<div id="feladatok" class="slide section level1">
+<h1>Feladatok</h1>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">l2 ::</span> (p <span class="ot">-&gt;</span> q <span class="ot">-&gt;</span> r) <span class="ot">-&gt;</span> (q <span class="ot">-&gt;</span> p <span class="ot">-&gt;</span> r)
+l2 <span class="fu">=</span> undefined
+
+<span class="ot">l3 ::</span> p <span class="fu">:&lt;-&gt;</span> (<span class="dt">True</span> <span class="fu">:/</span>\ p)
+l3 <span class="fu">=</span> undefined
+
+<span class="ot">l4 ::</span> p <span class="fu">:&lt;-&gt;</span> (<span class="dt">False</span> <span class="fu">:</span>\<span class="fu">/</span> p)
+l4 <span class="fu">=</span> undefined
+
+<span class="ot">l5 ::</span> (p <span class="ot">-&gt;</span> q <span class="fu">:/</span>\ r) <span class="fu">:&lt;-&gt;</span> ((p <span class="ot">-&gt;</span> q) <span class="fu">:/</span>\ (p <span class="ot">-&gt;</span> r))
+l5 <span class="fu">=</span> undefined
+
+<span class="ot">l6 ::</span> (p <span class="fu">:</span>\<span class="fu">/</span> q <span class="ot">-&gt;</span> r) <span class="fu">:&lt;-&gt;</span> ((p <span class="ot">-&gt;</span> r) <span class="fu">:/</span>\ (q <span class="ot">-&gt;</span> r))
+l6 <span class="fu">=</span> undefined
+
+<span class="ot">l7 ::</span> p <span class="ot">-&gt;</span> <span class="dt">Not</span> (<span class="dt">Not</span> p)
+l7 <span class="fu">=</span> undefined
+
+<span class="ot">l8 ::</span> <span class="dt">Not</span> (<span class="dt">Not</span> (p <span class="fu">:</span>\<span class="fu">/</span> <span class="dt">Not</span> p))
+l8 <span class="fu">=</span> undefined
+
+<span class="ot">l9 ::</span> <span class="dt">Not</span> (<span class="dt">Not</span> (<span class="dt">Not</span> (<span class="dt">Not</span> p) <span class="ot">-&gt;</span> p))
+l9 <span class="fu">=</span> undefined
+
+<span class="ot">l10 ::</span> <span class="dt">Not</span> (<span class="dt">Not</span> (<span class="dt">Not</span> p)) <span class="fu">:&lt;-&gt;</span> <span class="dt">Not</span> p
+l10 <span class="fu">=</span> undefined
+
+<span class="ot">l11 ::</span> <span class="dt">Not</span> (p <span class="fu">:&lt;-&gt;</span> <span class="dt">Not</span> p)
+l11 <span class="fu">=</span> undefined
+
+<span class="ot">l12 ::</span> (<span class="dt">Not</span> p <span class="fu">:</span>\<span class="fu">/</span> q) <span class="ot">-&gt;</span> (p <span class="ot">-&gt;</span> q)
+l12 <span class="fu">=</span> undefined
+
+<span class="ot">l13 ::</span> (<span class="dt">Not</span> (p <span class="fu">:</span>\<span class="fu">/</span> q)) <span class="fu">:&lt;-&gt;</span> (<span class="dt">Not</span> p <span class="fu">:/</span>\ <span class="dt">Not</span> q)
+l13 <span class="fu">=</span> undefined
+
+<span class="ot">l14 ::</span> (<span class="dt">Not</span> p <span class="fu">:</span>\<span class="fu">/</span> <span class="dt">Not</span> q) <span class="ot">-&gt;</span> <span class="dt">Not</span> (p <span class="fu">:/</span>\ q)
+l14 <span class="fu">=</span> undefined</code></pre></div>
+<p>Mi a helyzet a következővel?</p>
+<div class="sourceCode"><pre class="sourceCode literate haskell"><code class="sourceCode haskell"><span class="ot">l15 ::</span> <span class="dt">Not</span> (p <span class="fu">:/</span>\ q) <span class="ot">-&gt;</span> (<span class="dt">Not</span> p <span class="fu">:</span>\<span class="fu">/</span> <span class="dt">Not</span> q)
+l15 <span class="fu">=</span> undefined</code></pre></div>
+</div>
+<div id="további-információk" class="slide section level1">
+<h1>További információk</h1>
+<p>Feladatok forrása: Thorsten Altenkirch IFR tantárgya</p>
+<p>Ha érdekel a programozás és a logika kapcsolata, a következő helyeken lehet információt találni:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Curry-Howard izomorfizmus</a></li>
+<li><a href="http://people.inf.elte.hu/pgj/agda/tutorial">Agda tutorial</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Type_theory">Típuselmélet</a></li>
+<li><a href="http://homotopytypetheory.org">Homotópia típuselmélet</a></li>
+</ul>
+</div>
+</body>
+</html>

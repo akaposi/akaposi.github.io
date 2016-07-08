@@ -610,7 +610,7 @@ Feladatok
  * [Rekurzió](http://lambda.inf.elte.hu/fp/Recursion.xml)
  * [Függvénykompozíció](http://lambda.inf.elte.hu/fp/Composition.xml)
  * [További függvények](http://lambda.inf.elte.hu/fp/ByFunctions.xml)
- * Logika
+ * [Logika](http://akaposi.bitbucket.org/haskell/logic.html)
 
 
 Források
