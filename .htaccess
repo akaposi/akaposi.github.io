@@ -1,0 +1,4 @@
+<Files *.pdf>
+  ForceType application/pdf
+  Header set Content-Disposition inline
+</Files>
