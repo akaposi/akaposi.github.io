@@ -323,7 +323,7 @@ Mit csinálhatnak az alábbi függvények?
 Tisztaság (mellékhatás-mentesség) (2/2)
 ====================================
 
-![Nirvana elérése](http://akaposi.bitbucket.org/haskell/spj-abra.png)
+![Nirvana elérése](spj-abra.png)
 
 --
 
@@ -610,7 +610,7 @@ Feladatok
  * [Rekurzió](http://lambda.inf.elte.hu/fp/Recursion.xml)
  * [Függvénykompozíció](http://lambda.inf.elte.hu/fp/Composition.xml)
  * [További függvények](http://lambda.inf.elte.hu/fp/ByFunctions.xml)
- * [Logika](http://akaposi.bitbucket.org/haskell/logic.html)
+ * [Logika](logic.html)
 
 
 Források
