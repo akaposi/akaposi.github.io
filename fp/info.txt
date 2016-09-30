@@ -1,5 +1,0 @@
-Ez a szovegfile UTF-8 kodolasu.
-
-Fordítóprogramok tantárgy, Kaposi Ambrus gyakorlatvezető. Gyakorlat: 2012 tavaszi félév, péntek 8:30-10:00, D 3-716
-
-előadó honlapja: http://deva.web.elte.hu (összes követelmény, minden fontos info megtalálható, a feladatgyűjtemény is, ami alapján gyakorlaton haladunk)
