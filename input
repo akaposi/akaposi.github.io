@@ -1,0 +1,28 @@
+{"con":{"x": "Int"}, "exp": {"op": "Var", "args": "x"}, "ty": "Int"}
+{"con":{"x": "Str"}, "exp": {"op": "Var", "args": "x"}, "ty": "Str"}
+{"con":{}, "exp": {"op": "IntLit", "args": 29}, "ty": "Int"}
+{"con":{}, "exp": {"op": "IntLit", "args": -29}, "ty": "Int"}
+{"con":{}, "exp": {"op": "StrLit", "args": "hello"}, "ty": "Str"}
+{"con":{"x":"Int","y":"Int"},"exp":{"op":"Add","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Int"}
+{"con":{"x":"Int","y":"Int"},"exp":{"op":"Sub","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Int"}
+{"con":{"x":"Str","y":"Str"},"exp":{"op":"Cat","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Str"}
+{"con":{"x":"Str"},"exp":{"op":"Len","args":{"op":"Var","args":"x"}},"ty":"Int"}
+{"con":{"x":"Int"},"exp":{"op":"Let","args":[{"op": "Var", "args":"x"},"y",{"op": "Var", "args":"y"}]},"ty":"Int"}
+{"con":{"x":"Str"},"exp":{"op":"Let","args":[{"op": "Var", "args":"x"},"y",{"op": "Var", "args":"y"}]},"ty":"Str"}
+{"con":{"x":"Int"},"exp":{"op":"Let","args":[{"op":"IntLit","args":100},"y",{"op":"Sub","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]}]},"ty":"Int"}
+{"con":{"x":"Int"},"exp":{"op":"Add","args":[{"op":"Var","args":"x"},{"op":"Var","args":"x"}]},"ty":"Int"}
+{"con":{"x": "Int", "s": "Str"}, "exp": {"op": "Sub", "args": [{"op":"Add","args":[{"op":"Var","args":"x"},{"op":"Len","args":{"op": "Var", "args": "s"}}]}, {"op": "Len", "args": {"op": "Cat", "args": [{"op": "Var", "args": "s"}, {"op": "StrLit", "args":"hello bello"}]}}]}, "ty": "Int"}
+{"con": {}, "exp": {"op": "Let", "args": [{"op": "IntLit", "args": 23}, "x", {"op": "Let", "args": [{"op": "StrLit", "args": "hello"}, "y", {"op": "Let", "args": [{"op": "Var", "args": "x"}, "z", {"op": "Add", "args": [{"op": "Add", "args": [{"op": "Var", "args": "x"}, {"op": "Var", "args": "z"}]}, {"op": "Len", "args": {"op": "Var", "args": "y"}}]}]}]}]}, "ty": "Int"}
+{"con":{"x": "Int"}, "exp": {"op": "Var", "args": "x"}, "ty": "Str"}
+{"con":{"x": "Str"}, "exp": {"op": "Var", "args": "x"}, "ty": "Int"}
+{"con":{}, "exp": {"op": "IntLit", "args": 29}, "ty": "Str"}
+{"con":{}, "exp": {"op": "IntLit", "args": -29}, "ty": "Str"}
+{"con":{}, "exp": {"op": "StrLit", "args": "hello"}, "ty": "Int"}
+{"con":{"x":"Int","y":"Int"},"exp":{"op":"Add","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Str"}
+{"con":{"x":"Int","y":"Int"},"exp":{"op":"Sub","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Str"}
+{"con":{"x":"Str","y":"Str"},"exp":{"op":"Cat","args":[{"op":"Var","args":"x"},{"op":"Var","args":"y"}]},"ty":"Int"}
+{"con":{"x":"Str"},"exp":{"op":"Len","args":{"op":"Var","args":"x"}},"ty":"Str"}
+{"con":{"x":"Int"},"exp":{"op":"Let","args":[{"op": "Var", "args":"x"},"y",{"op": "Var", "args":"y"}]},"ty":"Str"}
+{"con":{"x":"Str"},"exp":{"op":"Let","args":[{"op": "Var", "args":"x"},"y",{"op": "Var", "args":"y"}]},"ty":"Int"}
+{"con":{}, "exp": {"op": "Var", "args": "x"}, "ty": "Int"}
+{"con": {}, "exp": {"op": "Let", "args": [{"op": "IntLit", "args": 23}, "x", {"op": "Let", "args": [{"op": "StrLit", "args": "hello"}, "y", {"op": "Let", "args": [{"op": "Var", "args": "x"}, "z", {"op": "Add", "args": [{"op": "Add", "args": [{"op": "Var", "args": "x"}, {"op": "Var", "args": "z"}]}, {"op": "Len", "args": {"op": "Var", "args": "y"}}]}]}]}]}, "ty": "Str"}
