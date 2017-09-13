@@ -1,4 +1,4 @@
-﻿# Tematika
+# Tematika
 # 
 # *Ismerkedés az R felülettel
 # Matematikai alapműveletek, sorozatok, vektorok, mátrixok (=számok
@@ -33,7 +33,7 @@
 sqrt(36); sin(3.14); abs(-5); log10(100)
 pi
 
-# d) felfele gomb
+# d) felfele gomb, Ctrl-R
 
 # e) Változók: pi, saját változók, <- (értékadás)
 r <- 6378; r; kerulet <- r*2*pi
@@ -41,11 +41,18 @@ V <- 4*pi/3*r^3
 # Feladat: duplázzuk meg V-t és az eredményt rakjuk be V-be!
 # Feladat: felezzük meg V-t és az eredményt tároljuk el V-ben!
 
-# f) Adattípusok: class(), "numeric", "logical", TRUE, FALSE, "character", hibák
+# save-load workspace
+
+# f) Adatosztályok: class(), "numeric", "logical", TRUE, FALSE, "character", hibák
 class(V); class(1); class("hello"); text <- "hello"; text; text*2; v1 <- text*2; v1
 1>2; 1==2; 1<=3; 2>=3; class(1>2)
+# Feladat: Több másodperc van -e az évben, mint
+# kilométer a Föld kerületében?
 
-# g) Vektor: c(), v[i], length(), sum(), v[c(i, j, k)]
+# g) Vektor: c(), v[i], length(), sum()
+v[3] <- 10
+
+v[c(i, j, k)]
 c(142, 194, 160, 171, 169, 154, 168, 164, 172, 188)
 heights <- c(142, 194, 160, 171, 169, 154, 168, 164, 172, 188)
 heights; c("aa", "bb"); class(heights); class(c("aa", "bb")); c(TRUE, FALSE); c("aa", 1)
@@ -94,7 +101,7 @@ plot(1:100, (1:100)^2, type="l")
 #   3. length(x) és length(y)
 #   4. x + y
 #   5. sum(x>5) és sum(x[x>5])
-#   6. sum(x>5 | x< 3) # read | as ’or’, & and ’a
+#   6. sum(x>5 | x< 3) # read | as 'or', & as 'and'
 #   7. y[3]
 #   8. y[-3]
 #   9. y[x]
