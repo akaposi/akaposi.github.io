@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Funkcionális nyelvek (IPM-08sztFPNYE, IPM-08EsztFPNYE)</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Funkcionális nyelvek (IPM-08sztFPNYE, IPM-08EsztFPNYE)</h1>
+</div>
+<table width="80%" align="center">
+<tr>
+<td>
+<hr />
+<p>Ez a tárgy a funkcionális programozás, azon belül is a tisztán funkcionális programozás paradigmájának alapjaival, annak bemutatásával foglalkozik. Mindezeket a <a href="http://clean.cs.ru.nl/Clean">Clean</a> programozási nyelven keresztül tárgyaljuk és mutatunk hozzájuk alkalmazási lehetőségeket a valós életben.</p>
+<h2 id="segédanyagok">Segédanyagok</h2>
+<p>A Clean nyelv és a funkcionális programozási paradigma megismerésével kapcsolatban a következő linkek javasoltak. A fordító letöltésekor ügyeljünk arra, hogy a legaktívabban a Clean Windowsos változatát fejlesztik, ezért azzal érdemes dolgozni. (Nem Windows rendszereken a <a href="https://www.winehq.org/">Wine</a> segítségével lehet például futtatni.)</p>
+<ul>
+<li><a href="http://wiki.clean.cs.ru.nl/Download_Clean">Clean IDE</a></li>
+<li><a href="https://bead.inf.elte.hu/files/clean/CleanLangRep.2.2.pdf">Clean Language Report 2.2</a></li>
+<li><a href="https://bead.inf.elte.hu/files/clean/CleanBookI.pdf">Functional Programming in Clean</a></li>
+<li><a href="https://bead.inf.elte.hu/files/clean/CleanStdEnvAPI.pdf">A Concise Guide to Clean StdEnv</a></li>
+</ul>
+<p>Ezek az anyagok a zárthelyi dolgozat írásakor is elérhetőek lesznek, viszont más, különösen hozott anyagot nem lehet használni! Kiegészítő lehetőségként meg lehet nézni a Haskellben írt jegyzetet is, noha nem minden ott szereplő megoldás alkalmazható közvetlenül:</p>
+<ul>
+<li><a href="http://lambda.inf.elte.hu/fp/">Funkcionális programozás jegyzet</a></li>
+</ul>
+<p>Továbbá Nyékyné Gaizler Judit szerkesztésében megjelent <a href="http://www.kiskapu.hu/konyvek/programozasi-nyelvek/">,,Programozási nyelvek'' könyv</a>ben is található egy külön fejezet csak a funkcionális programozási nyelvekről. Ezt is érdemes lehet áttanulmányozni a felkészüléshez.</p>
+<p>Egyéb jegyzetek:</p>
+<ul>
+<li><a href="http://people.inf.elte.hu/pgj/fny_msc/ADT.icl.txt">A 2016.10.19-i előadás anyaga</a></li>
+<li><a href="http://people.inf.elte.hu/pgj/fny_msc/Functor.icl.txt">A 2016.10.26-i előadás anyaga</a></li>
+<li><a href="http://people.inf.elte.hu/pgj/fny_msc/Monad.icl.txt">A 2016.11.09-i előadás anyaga</a></li>
+</ul>
+<h3 id="hasznos-tudnivalók-a-beadandókhoz">Hasznos tudnivalók a beadandókhoz</h3>
+<p>A feladatok megoldása során az alábbi, gyakran felmerülő problémákra érdemes odafigyelni, illetve megfogadni a tanácsokat:</p>
+<ul>
+<li><p>A <code>foldr</code> függvény jó barát! Igen sok probléma írható fel vele tömören. Ne feledjük, hogy az általa leírt összegzésnek az eredménye bármilyen típus lehet:</p>
+<pre><code>foldr :: (a b -&gt; b) b [a] -&gt; b
+foldr f r [x0 ... xn] = f x0 (f x1 (... (f xn r) ...))</code></pre></li>
+<li><p>Ha a Clean telepítési könyvtára nem a <code>C:</code> meghajtón van, nem feltétlenül sikerül a fordítás, az IDE szinte teljesen lemerevedik.</p></li>
+<li><p>Vigyázzunk arra, hogy a várakozásokkal ellentétben <code>[1,1..1] == [1..]</code>.</p></li>
+</ul>
+<p>Ez a lista természetesen nem teljes, ha akadnak további, bosszantó gondok, jelezzük az oktatóknak és bővíteni fogjuk a listát velük és a megoldásaikkal!</p>
+<h2 id="rinus-plasmeijer-előadásai">Rinus Plasmeijer előadásai</h2>
+<p>A félév előadásainak egy részét Rinus Plasmeijer tanár úr, a nijmegeni Radboud Universiteit professzora, a Clean nyelv megalkotója tartja tömbösítve 2017. november 20. és 24. között. Ennek részleteiről egy <a href="http://people.inf.elte.hu/pgj/afp/">külön aloldalon</a> találhatunk <em>angolul</em> információkat (mivel maguk az előadások, valamint a mellékelt segédanyagok is angol nyelvűek).</p>
+<h2 id="követelmények">Követelmények</h2>
+<p>A tárgy kollokvium, amelyhez szóbeli vizsga tartozik. A vizsga tételsora lentebb olvasható. A vizsgázás előfeltételeként azonban teljesíteni először a gyakorlati számonkérést, amelynek része két kötelezően teljesítendő beadandó, valamint két géptermi zárthelyi dolgozat sikeres megírása.</p>
+<p>Mind a beadandók, mind pedig a zárthelyi során a Clean tisztán funkcionális nyelven kell programokat írni. Ezek az tananyaghoz kapcsolódó, önállóan megoldandó programozási feladatokat jelentenek, amelyekhez az oktatók segítségét is igénybe lehet venni elektronikus levél írásával vagy a konzultációs alkalmakon. A feladatokat és az értékelésüket a <a href="https://bead.inf.elte.hu/">BE-AD</a> rendszerben lehet majd elérni, a tárgyhoz tartozó csoportba történő sikeres feliratkozást követően. A BE-AD szerverre a kari, INF-es (Pandorás) azonosítóval és jelszóval lehet belépni, oda külön regisztrálni már nem kell.</p>
+<p>A feladatok mindegyikét egy-egy zárthelyi dolgozat követi. Ezek a dolgozatok a beadandóhoz hasonló, de azoknál némileg egyszerűbb, szintén önállóan megoldandó programozási feladatok lesznek, amelyekből együtt számtani átlagban legalább 60%-os eredményt kell elérni a vizsgázáshoz. A két hibátlan dolgozatot írók számára a jeles érdemjegyet megajánljuk.</p>
+<p>Amennyiben valaki, nagyon indokolt esetben, nem tud részt venni valamelyik zárthelyin, az az oktatónál Neptun-kóddal, elektronikusan, előre jelezve feljelentkezhet a pótlás időpontjára. Az ez időpont egyben arra is lehetőséget ad, hogy akinek a félév során nem sikerült elérnie a kívánt teljesítményt, az a korábban megírt dolgozatokat javíthatja.</p>
+<h2 id="tételsor">Tételsor</h2>
+<p>A szóbeli vizsga tételsora lentebb olvasható. Ezek közül kap egyet a vizsgázó, akinek rövid felkészülés után önállóan, szóbal kell tudnia ismertetnie a tételben szereplő és a hozzájuk kapcsolódó fogalmakat.</p>
+<ol>
+<li>Alapfogalmak (kiértékelés, listák, currying, magasabbrendű függvények)</li>
+<li>Algebrai adattípusok (felsorolásos, paraméteres, rekurzív)</li>
+<li>Típusosztályok, parametrikus és ad-hoc polimorfizmus</li>
+<li>Magasabbrendű típusok, típuskonstruktor-osztályok, példák</li>
+<li>Monadikus programozás (<code>Monad</code>, <code>return</code>, <code>&gt;&gt;=</code>, <code>&gt;&gt;</code>), példák (<code>State</code>, <code>Maybe</code>, <code>[]</code>)</li>
+<li>Generikus alaptípusok, típusok leképezése generikus típusokra (<code>from</code>, <code>to</code>), értékek ábrázolása generikus formában</li>
+<li>A generikus programozás módszere, a generikus egyenlőség mint példa</li>
+<li>Kindok, generikus <code>map</code>, <code>map0</code>, <code>map1</code>,... osztályok</li>
+<li>A Clean generikus nyelvi fogalmai, <code>derive</code>, példák</li>
+<li>iTask (kombinátorok, technikai modell, felület)</li>
+</ol>
+<h2 id="a-félév-ütemezése">A félév ütemezése</h2>
+<p>Első beadandó:</p>
+<ul>
+<li> 2017. október 5. (csütörtök) 17:00 (nyitás)</li>
+<li> 2017. október 19. (csütörtök) 17:00 (zárás)</li>
+</ul>
+<p>Első zárthelyi:</p>
+<ul>
+<li> 2017. október 20. (péntek), 17:00 — 19:00, Lovarda</li>
+</ul>
+<p>Második beadandó:</p>
+<ul>
+<li> 2017. november 16. (csütörtök) 17:00 (nyitás)</li>
+<li> 2017. november 30. (csütörtök) 17:00 (zárás)</li>
+</ul>
+<p>Második zárthelyi:</p>
+<ul>
+<li> 2017. december 1. (péntek), 17:00 — 19:00, Lovarda</li>
+</ul>
+<p>Zárthelyik pótlása, javítása:</p>
+<ul>
+<li> 2017. december 15. (péntek), 16:00 — 18:00 (első zárthelyi), Adatbázis labor</li>
+<li> 2017. december 15. (péntek), 18:00 — 20:00 (második zárthelyi), Adatbázis labor</li>
+</ul>
+<h2 id="konzultáció">Konzultáció</h2>
+<p>A kurzushoz tartoznak tanrendbe beosztott konzultációs alkalmak is, amelyek <em>hétfőnként 16:00 és 17:00</em> között, a <em>2-123 (PC4)</em> teremben lesznek megtartva (még nem teljesen biztos, hogy itt). A gyakorlati számonkérés szervezéséért felelős oktató természetesen szükség esetén elektronikus levélben is megkereshető:</p>
+<ul>
+<li><a href="mailto:akaposi@inf.elte.hu">Kaposi Ambrus</a>
+</ul>
+<hr />
+<p><a href="../">Vissza az oktatói honlapra</a></p>
+<p><em>Utolsó módosítás: 2017.09.14.</em></p>
+</td>
+</tr>
+</table>
+</body>
+</html>
