@@ -1,39 +1,39 @@
 # Tematika
 # 
-# *IsmerkedÃ©s az R felÃ¼lettel
-# Matematikai alapmuveletek, sorozatok, vektorok, mÃ¡trixok (=szÃ¡mok
-# tÃ¡blÃ¡zatban, csak semmi linalg) lÃ©trehozÃ¡sa, alapvetu muveleteik.
+# *Ismerkedés az R felülettel
+# Matematikai alapmuveletek, sorozatok, vektorok, mátrixok (=számok
+# táblázatban, csak semmi linalg) létrehozása, alapvetu muveleteik.
 # 
-# *Adatok bevitele, egyszeru adatfeldolgozÃ¡si muveletek
-# BeolvasÃ¡s fÃ¡jlbÃ³l (txt, csv), Ã­rÃ¡s fÃ¡jlba, a beolvasott adatok
-# egyszeru manipulÃ¡cÃ³ja (rendezÃ©s, keresÃ©s, rÃ©szmÃ¡trixok kijelÃ¶lÃ©se).
+# *Adatok bevitele, egyszeru adatfeldolgozási muveletek
+# Beolvasás fájlból (txt, csv), írás fájlba, a beolvasott adatok
+# egyszeru manipulácója (rendezés, keresés, részmátrixok kijelölése).
 # 
-# *Adatok vizualizÃ¡ciÃ³ja
-# Plot, diagramok: kÃ¶r-, oszlopdiagramok, paramÃ©teretÃ©sÃ¼k.
+# *Adatok vizualizációja
+# Plot, diagramok: kör-, oszlopdiagramok, paraméteretésük.
 # 
-# *Elemi programozÃ¡s R-ben
-# ElÃ¡gazÃ¡s, ciklus, fÃ¼ggvÃ©ny. HasznÃ¡latuk nÃ©hÃ¡ny statisztikai feladat
-# megoldÃ¡sa sorÃ¡n pÃ©ldÃ¡kkal (pl. ismerve az elozo Ã©vhez viszonyÃ­tott
-# Ã¡rszintemelkedÃ©st, szÃ¡moljunk kumulatÃ­v vÃ¡ltozÃ¡st stb.).
+# *Elemi programozás R-ben
+# Elágazás, ciklus, függvény. Használatuk néhány statisztikai feladat
+# megoldása során példákkal (pl. ismerve az elozo évhez viszonyított
+# árszintemelkedést, számoljunk kumulatív változást stb.).
 # 
-# *AdatelemzÃ©s, nÃ©hÃ¡ny statisztikai prÃ³ba
-# DiszkrÃ©t eloszlÃ¡sok, nagyon egyszeru prÃ³ba pl. annak ellenorzÃ©sÃ©re, hogy
-# egy pÃ©nzÃ©rme dobÃ¡ssorozata szabÃ¡lyos Ã©rmÃ©t hasznÃ¡lva keletkezett-e.
+# *Adatelemzés, néhány statisztikai próba
+# Diszkrét eloszlások, nagyon egyszeru próba pl. annak ellenorzésére, hogy
+# egy pénzérme dobássorozata szabályos érmét használva keletkezett-e.
 
-# a) parancssor, parancs, eredmÃ©ny
+# a) parancssor, parancs, eredmény
 1+1
 
-# b) matematikai fÃ¼ggvÃ©nyek: +, -, *, /, ^
+# b) matematikai függvények: +, -, *, /, ^
 1+2*(3+4)
 2^5
 
-# Feladat: hÃ¡ny mÃ¡sodperc van egy Ã©vben?
+# Feladat: hány másodperc van egy évben?
 
 
-# Feladat: a FÃ¶ld sugara 6378 km. Milyen hosszÃº az egyenlÃ­to?
+# Feladat: a Föld sugara 6378 km. Milyen hosszú az egyenlíto?
 
 
-# c) TovÃ¡bbi fÃ¼ggvÃ©nyek: sqrt(), abs(), sin(), log10(), log(), exp()
+# c) További függvények: sqrt(), abs(), sin(), log10(), log(), exp()
 sqrt(36)
 sin(3.14)
 abs(-5)
@@ -42,21 +42,21 @@ pi
 
 # d) felfele gomb, Ctrl-R
 
-# e) VÃ¡ltozÃ³k: pi, sajÃ¡t vÃ¡ltozÃ³k, <- (Ã©rtÃ©kadÃ¡s)
+# e) Változók: pi, saját változók, <- (értékadás)
 r <- 6378
 r
 kerulet <- r*2*pi
 V <- 4*pi/3*r^3
 
-# Feladat: duplÃ¡zzuk meg V-t Ã©s az eredmÃ©nyt rakjuk be V-be!
+# Feladat: duplázzuk meg V-t és az eredményt rakjuk be V-be!
 
 
-# Feladat: felezzÃ¼k meg V-t Ã©s az eredmÃ©nyt tÃ¡roljuk el V-ben!
+# Feladat: felezzük meg V-t és az eredményt tároljuk el V-ben!
 
 
 # save-load workspace
 
-# f) AdatosztÃ¡lyok: class(), "numeric", "logical", TRUE, FALSE, "character", hibÃ¡k
+# f) Adatosztályok: class(), "numeric", "logical", TRUE, FALSE, "character", hibák
 class(V)
 class(1)
 class("hello")
@@ -70,8 +70,8 @@ v1
 1<=3
 2>=3
 class(1>2)
-# Feladat: TÃ¶bb mÃ¡sodperc van -e az Ã©vben, mint kilomÃ©ter a FÃ¶ld
-# kerÃ¼letÃ©ben?
+# Feladat: Több másodperc van -e az évben, mint kilométer a Föld
+# kerületében?
 
 
 # g) Vektor: c(), v[i], length(), sum()
@@ -90,27 +90,27 @@ length(heights)
 sum(heights)
 heights[1]
 heights[2]
-# Feladat: a heights vektor utolsÃ³ elemÃ©t tÃ¡roljuk el egy Ãºj vÃ¡ltozÃ³ban (pl. L nÃ©vvel)
+# Feladat: a heights vektor utolsó elemét tároljuk el egy új változóban (pl. L névvel)
 
 
-# Feladat: mi a heights Ã¡tlaga?
+# Feladat: mi a heights átlaga?
 
 
-# h) LeÃ­rÃ³ statisztika: mean(), sd(), var(), range(), min(), max(),
+# h) Leíró statisztika: mean(), sd(), var(), range(), min(), max(),
 #    median(), quantile()
 mean(heights)
 heights*2
 heights - 5
-# standard szÃ³rÃ¡s: sqrt(sum((heights-sum(heights)/length(heights))^2)/(length(heights)-1))
+# standard szórás: sqrt(sum((heights-sum(heights)/length(heights))^2)/(length(heights)-1))
 sd(heights)
 heights[c(1,2,3)]
-# Feladat: a heights hÃ¡rom utolsÃ³ eleme
+# Feladat: a heights három utolsó eleme
 
 
 min(heights)
 max(heights)
 range(heights)
-# Feladat: szÃ¡moljuk ki a tartomÃ¡nyt a range fÃ¼ggvÃ©ny nÃ©lkÃ¼l
+# Feladat: számoljuk ki a tartományt a range függvény nélkül
 
 
 quantile(heights)
@@ -121,13 +121,13 @@ weights<-c(40, 84, 64, 66, 83, 55, 85, 95, NA, 68)
 quantile(weights)
 quantile(weights, na.rm=TRUE)
 
-# i) ?, FÃ¼ggvÃ©nyek tÃ¶bb paramÃ©terrel, summary(), fivenum()
+# i) ?, Függvények több paraméterrel, summary(), fivenum()
 summary(heights)
 summary(weights)
 fivenum(heights)
 ?fivenum
 
-# j) ÃbrÃ¡zolÃ¡s: hist(), plot(), egymÃ¡s utÃ¡ni szÃ¡mokbÃ³l Ã¡llÃ³ vektorok: 1:10
+# j) Ábrázolás: hist(), plot(), egymás utáni számokból álló vektorok: 1:10
 hist(weights)
 ?hist
 hist(weights, breaks=10)
@@ -143,27 +143,27 @@ sort(c(3,1,5,3,2))
 sort(heights)
 plot(sort(heights))
 
-# Feladat: egy tetszolegesen hosszÃº vektor egymÃ¡s melletti elemeinek kÃ¼lÃ¶nbsÃ©ge:
+# Feladat: egy tetszolegesen hosszú vektor egymás melletti elemeinek különbsége:
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
-#   egy parancs, Ã©s az eredmÃ©ny legyen: c(2,2,-2,-2,1,1,-2,4,2,2)
+#   egy parancs, és az eredmény legyen: c(2,2,-2,-2,1,1,-2,4,2,2)
 
 
-# Feladat: a kÃ¶vetkezo matematikai fÃ¼ggvÃ©nyek Ã¡brÃ¡zolÃ¡sa -5 Ã©s 5 x
-# Ã©rtÃ©kek kÃ¶zÃ¶tt egy ploton (lÃ¡sd ?lines) kÃ¼lÃ¶nbÃ¶zo szÃ­nekkel: sin,
+# Feladat: a következo matematikai függvények ábrázolása -5 és 5 x
+# értékek között egy ploton (lásd ?lines) különbözo színekkel: sin,
 # x^2, x^3, exp
 
 
-# Feladat: mi az eredmÃ©ny, a parancs beÃ­rÃ¡sa nÃ©lkÃ¼l prÃ³bÃ¡ld meg
-# kitalÃ¡lni! UtÃ¡na prÃ³bÃ¡ld ki a parancsot, Ã©s magyarÃ¡zd meg az
-# eredmÃ©nyt!
+# Feladat: mi az eredmény, a parancs beírása nélkül próbáld meg
+# kitalálni! Utána próbáld ki a parancsot, és magyarázd meg az
+# eredményt!
 x<-c(1,3,5,7,9)
 y<-c(2,3,5,7,11,13)
 #   1. x+1
 #   2. y*2
-#   3. length(x) Ã©s length(y)
+#   3. length(x) és length(y)
 #   4. x + y
-#   5. sum(x>5) Ã©s sum(x[x>5])
-#   6. sum(x>5 | x< 3) # | = vagy, & = Ã©s
+#   5. sum(x>5) és sum(x[x>5])
+#   6. sum(x>5 | x< 3) # | = vagy, & = és
 #   7. y[3]
 #   8. y[-3]
 #   9. y[x]
@@ -188,22 +188,22 @@ x[which(x<=4)]
 which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
-# Feladat: x-nek hÃ¡ny olyan eleme van, melyek nagyobbak, mint 4?
+# Feladat: x-nek hány olyan eleme van, melyek nagyobbak, mint 4?
 
 
-# Feladat: x-nak azok az elemei, melyek nagyobbak x Ã¡tlagÃ¡nÃ¡l
+# Feladat: x-nak azok az elemei, melyek nagyobbak x átlagánál
 
 
-# Feladat: x Ã©s y elemei Ã¶sszefÅ±zve, rendezve
+# Feladat: x és y elemei összefûzve, rendezve
 y<-c(2,3,5,7,11,13)
 
 
-# Feladat: x Ã©s y elemei Ã¶sszefÅ±zve, rendezve, de Ãºgy, hogy ne
-# legyenek ismÃ©tlÅ‘dÅ‘ elemek (hasznÃ¡ld a unique fÃ¼ggvÃ©nyt)!
+# Feladat: x és y elemei összefûzve, rendezve, de úgy, hogy ne
+# legyenek ismétlõdõ elemek (használd a unique függvényt)!
 
 # k) if, %%
 x <- 3
-if (x>1) { "nagyobb!" } else { "kisebb vagy egyenlÅ‘!" }
+if (x>1) { "nagyobb!" } else { "kisebb vagy egyenlõ!" }
 x <- 1
 x <- 5
 
@@ -214,15 +214,15 @@ x <- 5
 8 %% 3
 9 %% 3
 
-# Feladat: Ã­rj egy kifejezÃ©st, mely akkor TRUE, ha x pÃ¡ros, kÃ¼lÃ¶nben FALSE
+# Feladat: írj egy kifejezést, mely akkor TRUE, ha x páros, különben FALSE
 
 
-# Feladat: mediÃ¡n
+# Feladat: medián
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
-#   egy parancs Ã©s csak a sum(), length(), if{}else{} Ã©s +,-,*,/ fÃ¼ggvÃ©nyek hasznÃ¡lata
+#   egy parancs és csak a sum(), length(), if{}else{} és +,-,*,/ függvények használata
 
 
-# l) mÃ¡trixok: matrix(), dim, 2D-indexelÃ©s: m[i,j], m[i,], m[j,]
+# l) mátrixok: matrix(), dim, 2D-indexelés: m[i,j], m[i,], m[j,]
 ?matrix
 m <- matrix(c(3,5,7,5,5,4), ncol=2)
 m
@@ -240,17 +240,17 @@ m[,2]
 m+1
 m*2
 
-# Feladat: add Ã¶ssze a mÃ¡trix kÃ©t oszlopÃ¡t! Az eredmÃ©nynek a
-# kÃ¶vetezÅ‘nek kell lennie:
+# Feladat: add össze a mátrix két oszlopát! Az eredménynek a
+# követezõnek kell lennie:
 # [1]  8 10 11
 
     
-# Feladat: add meg az alÃ¡bbi mÃ¡trixot (kÃ©t sor, 200 oszlop) (lÃ¡sd ?matrix):
+# Feladat: add meg az alábbi mátrixot (két sor, 200 oszlop) (lásd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
 
 
-# m) fÃ¡jlok beolvasÃ¡sa: read.csv
+# m) fájlok beolvasása: read.csv
 
 # https://akaposi.github.io/biostatistik/beispiel_daten/tx-24hr.xls
 tx <- read.csv("tx-24hr.csv", na.strings="", stringsAsFactors=F)
@@ -268,7 +268,7 @@ tx[c(5,4,3,2,1),2]
 summary(tx)
 
 
-# n) table, pie (kÃ¶rdiagram), barplot (oszlopdiagram)
+# n) table, pie (kördiagram), barplot (oszlopdiagram)
 x <- c(20,10,40,10)
 pie(x)
 barplot(x)
@@ -278,19 +278,19 @@ table(tx[,6])
 pie(table(tx[,6]))
 barplot(table(tx[,6]))
 
-# Feladat: tx: nemi eloszlÃ¡s kÃ¶rdiagramon
+# Feladat: tx: nemi eloszlás kördiagramon
 
 
-# Feladat: tx: napi (tag) eloszlÃ¡s kÃ¶rdiagramon
+# Feladat: tx: napi (tag) eloszlás kördiagramon
 
 
-# Feladat: tx: Ã¡brÃ¡zold a nÅ‘k (weiblich) survival.tod hisztogramjÃ¡t!
+# Feladat: tx: ábrázold a nõk (weiblich) survival.tod hisztogramját!
 
 
-# Feladat: tx: Ã¡brÃ¡zold a fÃ©rfiak (mannlich) survival.tod
-# hisztogramjÃ¡t! CsinÃ¡ld meg, hogy ugyanaz legyen a tengelyeken
-# (breaks, ylim paramÃ©terei a hist fÃ¼ggvÃ©nynek). Mentsd el ezt Ã©s az
-# elÅ‘zÅ‘ hisztogramot Ã©s rakd Å‘ket egymÃ¡s mellÃ© (pl. Wordben)!
+# Feladat: tx: ábrázold a férfiak (mannlich) survival.tod
+# hisztogramját! Csináld meg, hogy ugyanaz legyen a tengelyeken
+# (breaks, ylim paraméterei a hist függvénynek). Mentsd el ezt és az
+# elõzõ hisztogramot és rakd õket egymás mellé (pl. Wordben)!
 
 
 # o) boxplot
@@ -299,20 +299,20 @@ boxplot(tx[, 4])
 ?boxplot
 boxplot(tx[, 4] ~ tx[, 2])
 
-# Feladat: tx: Ã¡brÃ¡zold boxplot-tal a survival.tod Ã©rtÃ©kÃ©t a napszak
-# (tageszeit) fÃ¼ggvÃ©nyÃ©ben!
+# Feladat: tx: ábrázold boxplot-tal a survival.tod értékét a napszak
+# (tageszeit) függvényében!
 
 
-# Feladat: tx: a tÃ¡blÃ¡zatot Ã­rd egy tx-new.csv ki survival.tod szerint
-# sorbarendezve (order, write.csv fÃ¼ggvÃ©nyek), Ã©s nyisd meg Excelben!
+# Feladat: tx: a táblázatot írd egy tx-new.csv ki survival.tod szerint
+# sorbarendezve (order, write.csv függvények), és nyisd meg Excelben!
 
 
-# Feladat: olvassuk be egy sl nevÅ± vÃ¡ltozÃ³ba:
+# Feladat: olvassuk be egy sl nevû változóba:
 # https://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
 
 
-# Feladat: sl: Ã¡brÃ¡zold az extra Ã©rtÃ©keket boxplottal a group
-# fÃ¼ggvÃ©nyÃ©ben!
+# Feladat: sl: ábrázold az extra értékeket boxplottal a group
+# függvényében!
 
 
 
@@ -325,7 +325,7 @@ boxplot(tx[, 4] ~ tx[, 2])
 
 xxx
 
-# l) kategorikus adatok grafikus Ã¡brÃ¡zolÃ¡sa: barplot(, legend.text=TRUE, beside=TRUE),
+# l) kategorikus adatok grafikus ábrázolása: barplot(, legend.text=TRUE, beside=TRUE),
 #    mosaicplot()
 barplot(m, legend.text=TRUE, beside=TRUE)
 mosaicplot(m)
@@ -333,23 +333,23 @@ mosaicplot(m)
 
 
 
-# n) hiÃ¡nyzÃ³/speciÃ¡lis adatok: NA, NaN, Inf
+# n) hiányzó/speciális adatok: NA, NaN, Inf
 tx[18, ]; 0/0; 1/0
-# Frage: a nem Ã©s a cadaver kÃ¶zÃ¶tt van -e Ã¶sszefÃ¼ggÃ©s? (tx-24hr)
+# Frage: a nem és a cadaver között van -e összefüggés? (tx-24hr)
 t <- table(tx[, 2], tx[, 3])
 chisq.test(t); fisher.test(t)
-# Feladat: nÃµket tÃ¶bbszÃ¶r operÃ¡ltak -e estÃ©nkÃ©nt, mint fÃ©rfiakat? (tx-24hr)
-# Feladat: operÃ¡ciÃ³ napja Ã©s cadaver kÃ¶zÃ¶tt Ã¶sszefÃ¼ggÃ©s? (tx-24hr)
+# Feladat: noket többször operáltak -e esténként, mint férfiakat? (tx-24hr)
+# Feladat: operáció napja és cadaver között összefüggés? (tx-24hr)
 
 # o) hisztogram
-# Feladat: Excelben megnyitni Ã©s CSV-be menteni:
+# Feladat: Excelben megnyitni és CSV-be menteni:
 #          https://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
 sleep <- read.csv2("sleep.csv")
 hist(sleep[, 1])
 
-# p) numerikus adatok grafikus megjelenÃ­tÃ©se: hist(), boxplot(), plot(density()), lines(density()),
-#    adatok szÃ»rÃ©se: which(), plot paramÃ©terei: par(mfrow=...)
-# Feladat: van -e kÃ¼lÃ¶nbsÃ©g a kÃ©t csoportban az alvÃ¡shossz-vÃ¡ltozÃ¡sban? (sleep)
+# p) numerikus adatok grafikus megjelenítése: hist(), boxplot(), plot(density()), lines(density()),
+#    adatok szurése: which(), plot paraméterei: par(mfrow=...)
+# Feladat: van -e különbség a két csoportban az alváshossz-változásban? (sleep)
 boxplot(sleep[, 1] ~ sleep[, 2])
 hist(sleep[, 1])
 hist(sleep[which(sleep[, 2] == 1), 1]
@@ -361,7 +361,7 @@ plot(density(sleep[which(sleep[, 2] == 1)), col="red")
 plot(density(sleep[which(sleep[, 2] == 2)), col="blue")
 
 
-# q) tÃ¡blÃ¡zat: table()
+# q) táblázat: table()
 smokes <- c("Y","N","N","Y","N","Y","Y","Y","N","Y")
 amount <- c(1,  2,  2,  3,  3,  1,  2,  1,  3,  2) # 1: <5h, 2: 5-10h, 3: >10h
 t <- table(smokes, amount)
@@ -378,14 +378,14 @@ ls()
 
 [dpqr]norm(), [dpqr]t()
 
-# c) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: kategorisch, unabhÃ¤ngige
+# c) Statistische Teste für die folgende Typ: abhängige Variable: kategorisch, unabhängige
 #    variable: kategorisch: Fisher-test (fisher.test()), Khiquadrat-test (chisq.test())
 # Frage: ist die Medizin wirksam? (Datei: m)
 chisq.test(m)
 fisher.test(m)
 
 
-# voltmÃ¡r:
+# voltmár:
 # d) Tabelle machen von kategorische Daten: table()
 smokes <- c("Y","N","N","Y","N","Y","Y","Y","N","Y")
 amount <- c(1,  2,  2,  3,  3,  1,  2,  1,  3,  2) # 1: <5h, 2: 5-10h, 3: >10h
@@ -395,10 +395,10 @@ chisq.test(t)
 fisher.test(t)
 
 # e) speichern als CSV in Excel, read.csv2(), head()
-                                        # Aufgabe: die folgende Datei in Excel erÃ¶ffnen und als CSV speichern:
+                                        # Aufgabe: die folgende Datei in Excel eröffnen und als CSV speichern:
 # 
 #          http://akaposi.github.io/biostatistik/beispiel_daten/tx-24h.xls
-tx <- read.csv2("tx-24hr.csv", na.strings="") # mit vollstÃ¤ndiger Pfad zur Datei
+tx <- read.csv2("tx-24hr.csv", na.strings="") # mit vollständiger Pfad zur Datei
 tx
 head(tx)
 tx[2,]
@@ -411,12 +411,12 @@ tx[18, ]; 0/0; 1/0
 #        (Datei: tx-24hr)
 t <- table(tx[, 2], tx[, 3])
 chisq.test(t); fisher.test(t)
-# Aufgabe: waren Frauen mehrmals nachtlich operiert als MÃ¤nner? (Datei: tx-24hr)
-# Aufgabe: ist der Tag der Operation unabhÃ¤ngig von Cadaver/nicht-Cadaver? (Datei: tx-24hr)
+# Aufgabe: waren Frauen mehrmals nachtlich operiert als Männer? (Datei: tx-24hr)
+# Aufgabe: ist der Tag der Operation unabhängig von Cadaver/nicht-Cadaver? (Datei: tx-24hr)
 
 # g) Entscheiden ob eine Variable Normalverteilung hat: hist() (sollte symmetrisch sein), qqnorm(),
 #    shapiro.test()
-# Aufgabe: die folgende Datei in Excel erÃ¶ffnen und als CSV speichern:
+# Aufgabe: die folgende Datei in Excel eröffnen und als CSV speichern:
 #          http://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
 sleep <- read.csv2("sleep.csv")
 hist(sleep[, 1])
@@ -425,7 +425,7 @@ shapiro.test(sleep[, 1])
 
 # h) graphische Darstellung numerische Daten: hist(), boxplot(), plot(density()), lines(density()),
 #    Filtrierung der Daten: which(), mehrere Abbildungen auf eine Abbildung: par(mfrow=...)
-# Frage: gibt es unterschied in SchlafzeitverÃ¤nderung zwischen den zwei Gruppen? (Datei: sleep)
+# Frage: gibt es unterschied in Schlafzeitveränderung zwischen den zwei Gruppen? (Datei: sleep)
 boxplot(sleep[, 1] ~ sleep[, 2])
 hist(sleep[, 1])
 hist(sleep[which(sleep[, 2] == 1), 1]
@@ -436,24 +436,24 @@ hist(sleep[which(sleep[, 2] == 2), 1]
 plot(density(sleep[which(sleep[, 2] == 1)), col="red")
 plot(density(sleep[which(sleep[, 2] == 2)), col="blue")
 
-# i) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: numerisch, Normalverteilung,
-#    unabhÃ¤ngige variable: kategorisch, zwei Kategorien: t-test (t.test())
-# Frage: gibt es unterschied in SchlafzeitverÃ¤nderung zwischen den zwei Gruppen? (Datei: sleep)
+# i) Statistische Teste für die folgende Typ: abhängige Variable: numerisch, Normalverteilung,
+#    unabhängige variable: kategorisch, zwei Kategorien: t-test (t.test())
+# Frage: gibt es unterschied in Schlafzeitveränderung zwischen den zwei Gruppen? (Datei: sleep)
 t.test(sleep[, 1] ~ sleep[, 2])
 t.test(sleep[1:10, 1], sleep[11:20, 1])
 
-# j) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: numerisch, nicht-Normalverteilung,
-#    unabhÃ¤ngige variable: kategorisch, zwei Kategorien: Wilcoxon-test (wilcox.test())
+# j) Statistische Teste für die folgende Typ: abhängige Variable: numerisch, nicht-Normalverteilung,
+#    unabhängige variable: kategorisch, zwei Kategorien: Wilcoxon-test (wilcox.test())
 # Frage: gibt es ein Zusammenhang zwischen Ereigniszeit und Geschlecht? (Datei: tx-24hr)
 hist(tx[, 4])
 qqnorm(tx[, 4])
 shapiro.test(tx[, 4])
 boxplot(tx[, 4] ~ tx[, 2])
 wilcox.test(tx[, 4] ~ tx[, 2])
-# Aufgabe: sterben nÃ¤chtlich operierte Leute frÃ¼her als tagsÃ¼ber operierte Leute?  (Datei: tx-24hr)
+# Aufgabe: sterben nächtlich operierte Leute früher als tagsüber operierte Leute?  (Datei: tx-24hr)
 
-# k) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: numerisch, Normalverteilung,
-#    unabhÃ¤ngige variable: kategorisch, mehr als zwei Kategorien: ANOVA
+# k) Statistische Teste für die folgende Typ: abhängige Variable: numerisch, Normalverteilung,
+#    unabhängige variable: kategorisch, mehr als zwei Kategorien: ANOVA
 daten <- read.table("http://www.biw.kuleuven.be/vakken/statisticsbyR/datasetsTXT/CH17TA02.txt")
 head(daten)
 daten[, 2] <- as.factor(daten[, 2])
@@ -464,13 +464,13 @@ summary(model)
 # Frage: wo gerade liegt der Unterschied?
 TukeyHSD(model)
 
-# l) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: numerisch, nicht-Normalverteilung,
-#    unabhÃ¤ngige variable: kategorisch, mehr als zwei Kategorien: Kruskal-Wallis-test (kruskal.test())
+# l) Statistische Teste für die folgende Typ: abhängige Variable: numerisch, nicht-Normalverteilung,
+#    unabhängige variable: kategorisch, mehr als zwei Kategorien: Kruskal-Wallis-test (kruskal.test())
 # Frage: gibt es eine Zusammenhang zwischen Ereigniszeit und Tag der Woche? (Datei: tx-24hr)
 boxplot(tx[, 4] ~ tx[, 6])
 kruskal.test(tx[, 4] ~ tx[, 6])
 
-# m) Statistische Teste fÃ¼r die folgende Typ: abhÃ¤ngige Variable: numerisch, unabhÃ¤ngige variable:
+# m) Statistische Teste für die folgende Typ: abhängige Variable: numerisch, unabhängige variable:
 #    numerisch: Korrelation (cor.test()), Regression
 # Frage: gibt es eine Zusammenhang zwischen Geschwindigkeit und Bremsweg? (Datei: cars)
 head(cars)
@@ -480,7 +480,7 @@ cor.test(cars[, 1], cars[, 2])
 
 
 
-# ZusÃ¤tzliche Aufgaben:
+# Zusätzliche Aufgaben:
 # 1.
 anest <- read.table("http://akaposi.github.io/biostatistik/beispiel_daten/anest.txt", header=TRUE)
 head(anest)
@@ -500,20 +500,21 @@ head(melanoma)
 
 # 4.
 head(ToothGrowth)
-# Aufgabe: gibt es ein Zusammenhang zwischen LÃ¤nge (len) und Dose in Gruppe VC? (Datei: ToothGrowth)
+# Aufgabe: gibt es ein Zusammenhang zwischen Länge (len) und Dose in Gruppe VC? (Datei: ToothGrowth)
 
 
 
-# ZusÃ¤tzliche Literatur:
+# Zusätzliche Literatur:
 # http://www.fe.ethz.ch/people/cbigler/projects/R/tutorial
 # http://www.cyclismo.org/tutorial/R/
 # http://www.statistik.tu-dortmund.de/~ligges/PmitR/
 
-# TovÃ¡bbi dolgok:
+# További dolgok:
 
 # * Sammlung von 20 mean(rnorm(100)) Werten (100 random standardnormalverteilte Werten) und
 #   1. Rechnung der Durchschnitt und Standardabweichung
 #   2. Darstellung auf einem Histogram
 #   3. Was ist die Zusammenhang zwischen der gerechnete Standardabweichung und der Streuung der Standardnormalverteilung (1)?
+
 
 
