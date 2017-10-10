@@ -20,17 +20,20 @@
 # Diszkrét eloszlások, nagyon egyszeru próba pl. annak ellenorzésére, hogy
 # egy pénzérme dobássorozata szabályos érmét használva keletkezett-e.
 
+
 # a) parancssor, parancs, eredmény
 1+1
+
 
 # b) matematikai függvények: +, -, *, /, ^
 1+2*(3+4)
 2^5
 
 # Feladat: hány másodperc van egy évben?
-
+365*24*60*60
 
 # Feladat: a Föld sugara 6378 km. Milyen hosszú az egyenlíto?
+6378*2*pi
 
 
 # c) További függvények: sqrt(), abs(), sin(), log10(), log(), exp()
@@ -40,7 +43,9 @@ abs(-5)
 log10(100)
 pi
 
+
 # d) felfele gomb, Ctrl-R
+
 
 # e) Változók: pi, saját változók, <- (értékadás)
 r <- 6378
@@ -49,12 +54,13 @@ kerulet <- r*2*pi
 V <- 4*pi/3*r^3
 
 # Feladat: duplázzuk meg V-t és az eredményt rakjuk be V-be!
-
+V <- V*2
 
 # Feladat: felezzük meg V-t és az eredményt tároljuk el V-ben!
-
+V <- V/2
 
 # save-load workspace
+
 
 # f) Adatosztályok: class(), "numeric", "logical", TRUE, FALSE, "character", hibák
 class(V)
@@ -72,6 +78,7 @@ v1
 class(1>2)
 # Feladat: Több másodperc van -e az évben, mint kilométer a Föld
 # kerületében?
+365*24*60*60 > kerulet
 
 
 # g) Vektor: c(), v[i], length(), sum()
@@ -91,9 +98,10 @@ sum(heights)
 heights[1]
 heights[2]
 # Feladat: a heights vektor utolsó elemét tároljuk el egy új változóban (pl. L névvel)
-
+L <- heights[length(heights)]
 
 # Feladat: mi a heights átlaga?
+sum(heights)/length(heights)
 
 
 # h) Leíró statisztika: mean(), sd(), var(), range(), min(), max(),
@@ -105,13 +113,13 @@ heights - 5
 sd(heights)
 heights[c(1,2,3)]
 # Feladat: a heights három utolsó eleme
-
+heights[c(length(heights)-2, length(heights)-1, length(heights))]
 
 min(heights)
 max(heights)
 range(heights)
 # Feladat: számoljuk ki a tartományt a range függvény nélkül
-
+c(min(heights), max(heights))
 
 quantile(heights)
 ?quantile
@@ -121,11 +129,13 @@ weights<-c(40, 84, 64, 66, 83, 55, 85, 95, NA, 68)
 quantile(weights)
 quantile(weights, na.rm=TRUE)
 
+
 # i) ?, Függvények több paraméterrel, summary(), fivenum()
 summary(heights)
 summary(weights)
 fivenum(heights)
 ?fivenum
+
 
 # j) Ábrázolás: hist(), plot(), egymás utáni számokból álló vektorok: 1:10
 hist(weights)
@@ -138,6 +148,7 @@ plot(c(1, 2, 3, 4), c(1^2, 2^2, 3^2, 4^2))
 plot(1:100, (1:100)^2)
 plot(1:100, (1:100)^2, type="l")
 
+
 # k) sort()
 sort(c(3,1,5,3,2))
 sort(heights)
@@ -146,12 +157,16 @@ plot(sort(heights))
 # Feladat: egy tetszolegesen hosszú vektor egymás melletti elemeinek különbsége:
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
 #   egy parancs, és az eredmény legyen: c(2,2,-2,-2,1,1,-2,4,2,2)
-
+x[2:length(x)]-x[1:(length(x)-1)]
 
 # Feladat: a következo matematikai függvények ábrázolása -5 és 5 x
 # értékek között egy ploton (lásd ?lines) különbözo színekkel: sin,
 # x^2, x^3, exp
-
+x <- seq(-5,5,0.1)
+plot(x, sin(x), type="l", ylim=c(-3, 5))
+lines(x, x^2, col="red")
+lines(x, x^3, col="green")
+lines(x, exp(x), col="blue")
 
 # Feladat: mi az eredmény, a parancs beírása nélkül próbáld meg
 # kitalálni! Utána próbáld ki a parancsot, és magyarázd meg az
@@ -168,6 +183,7 @@ y<-c(2,3,5,7,11,13)
 #   8. y[-3]
 #   9. y[x]
 #   10. y[y>=7]
+
 
 # l) order(), which()
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
@@ -189,23 +205,25 @@ which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
 # Feladat: x-nek hány olyan eleme van, melyek nagyobbak, mint 4?
-
+length(which(x > 4))
 
 # Feladat: x-nak azok az elemei, melyek nagyobbak x átlagánál
+x[which(x > mean(x))]
 
-
-# Feladat: x és y elemei összefûzve, rendezve
 y<-c(2,3,5,7,11,13)
+# Feladat: x és y elemei összefuzve, rendezve
+sort(c(c,y))
 
+# Feladat: x és y elemei összefuzve, rendezve, de úgy, hogy ne
+# legyenek ismétlodo elemek (használd a unique függvényt)!
+unique(sort(c(c,y)))
 
-# Feladat: x és y elemei összefûzve, rendezve, de úgy, hogy ne
-# legyenek ismétlõdõ elemek (használd a unique függvényt)!
 
 # k) if, %%
 x <- 3
-if (x>1) { "nagyobb!" } else { "kisebb vagy egyenlõ!" }
+if (x>1) { "nagyobb!" } else { "kisebb vagy egyenlo!" }
 x <- 1
-x <- 5
+x <- 4
 
 7 %% 2
 8 %% 2
@@ -215,11 +233,12 @@ x <- 5
 9 %% 3
 
 # Feladat: írj egy kifejezést, mely akkor TRUE, ha x páros, különben FALSE
+x %% 2 == 0
 
-
-# Feladat: medián
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
-#   egy parancs és csak a sum(), length(), if{}else{} és +,-,*,/ függvények használata
+# Feladat: medián. Egy parancs és csak a sum(), length(), if{}else{}
+# és +,-,*,/ függvények használata
+if (length(x) %% 2 == 0) { mean(sort(x)[c(length(x)/2,length(x)/2+1)]) } else { sort(x)[(length(x)+1)/2] }
 
 
 # l) mátrixok: matrix(), dim, 2D-indexelés: m[i,j], m[i,], m[j,]
@@ -241,13 +260,14 @@ m+1
 m*2
 
 # Feladat: add össze a mátrix két oszlopát! Az eredménynek a
-# követezõnek kell lennie:
+# követezonek kell lennie:
 # [1]  8 10 11
-
+m[,1]+m[,2]
     
 # Feladat: add meg az alábbi mátrixot (két sor, 200 oszlop) (lásd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
+matrix(c(1:200), ncol=100, byrow=TRUE)
 
 
 # m) fájlok beolvasása: read.csv
@@ -269,16 +289,42 @@ summary(tx)
 
 class(tx)
 
+head(tx[, 5])
+sort(tx[,5])
+order(tx[,5])
+
+tx[c(3,2,5),]
+tx[order(tx[,5]),]
+head(tx[order(tx[,5]),])
+tx[9,]
+?write.csv
+write.csv2(tx[order(tx[,5]),], "tx5.csv")
+
+tx5 <- read.csv2("tx5.csv")
+
+# Feladat: hány nő, hány férfi?
+sum(tx[,2]=="weiblich")
+length(tx[,2]) - sum(tx[,2]=="weiblich")
+
+# Feladat: hány olyan ember van, aki 1 évnél tovább élt?
+sum(tx[,4]>365, na.rm=TRUE)
+
+# Feladat: hány olyan nő van, aki 1 évnél tovább élt?
+sum(tx[,4]>365 & tx[,2]=="weiblich", na.rm=TRUE)
+
 
 # n) table, pie (kördiagram), barplot (oszlopdiagram)
 x <- c(20,10,40,10)
 pie(x)
 barplot(x)
 
-table(tx[,6])
+table(tx[,6])[c(5,1,4,2,3,6,7)]
 
 pie(table(tx[,6]))
 barplot(table(tx[,6]))
+
+# Feladat: a napok sorrendje jó legyen
+barplot(table(tx[,6])[c(5,1,4,2,3,6,7)])
 
 # Feladat: tx: nemi eloszlás kördiagramon
 
@@ -286,13 +332,15 @@ barplot(table(tx[,6]))
 # Feladat: tx: napi (tag) eloszlás kördiagramon
 
 
-# Feladat: tx: ábrázold a nõk (weiblich) survival.tod hisztogramját!
+# Feladat: tx: ábrázold a nok (weiblich) survival.tod hisztogramját!
 
 
 # Feladat: tx: ábrázold a férfiak (mannlich) survival.tod
 # hisztogramját! Csináld meg, hogy ugyanaz legyen a tengelyeken
 # (breaks, ylim paraméterei a hist függvénynek). Mentsd el ezt és az
-# elõzõ hisztogramot és rakd õket egymás mellé (pl. Wordben)!
+# elozo hisztogramot és rakd oket egymás mellé (pl. Wordben)!
+
+# ------------ HF idáig
 
 
 # o) boxplot
@@ -309,7 +357,7 @@ boxplot(tx[, 4] ~ tx[, 2])
 # sorbarendezve (order, write.csv függvények), és nyisd meg Excelben!
 
 
-# Feladat: olvassuk be egy sl nevû változóba:
+# Feladat: olvassuk be egy sl nevu változóba:
 # https://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
 
 
