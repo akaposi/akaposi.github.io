@@ -373,28 +373,60 @@ boxplot(tx[, 4] ~ tx[, 2])
 # Ellenőrző feladatok
 ######################################################################
 
-# 1. Írd ki a cars data.frame tartalmát egy fájlba, és olvasd be onnan
-# egy másik változóba!
+# 1. Írd ki a cars data.frame tartalmát egy autok.csv nevű fájlba, és
+#    olvasd be onnan egy autok nevű változóba!
 
-# 2. Ábrázold az autók megállási távolságát a sebesség függvényében
-# (cars változó), rakj magyar feliratokat a tengelyekre, az ábra fölé
-# írj címet!
+# 2. Számold ki az autok első oszlopának átlagát!
 
-# 3. Számítsd ki a 3 különböző fajtájú virágra mind a 4 paraméter
-# átlagát (iris változó)! Tehát összesen 3*4=12 átlagra van szükség.
+# 3. Számold ki az autok második oszlopának összegét!
 
-# 4. Ha 4%-os kamatot kapunk évente 250 forintra, akkor 100 év múlva
-# kamatos kamattal mennyit kapunk vissza?
+# 4. Ábrázold az autók megállási távolságát a sebesség függvényében,
+#    rakj magyar feliratokat a tengelyekre, az ábra fölé írj címet!
 
-# 5. A sleep data frame-et rendezd extra szerint.
+# 5. Hozz létre egy vektort, amelyben 100 elem van, a páros számok
+#    2-től 200-ig! A vektort tárold a V változóban!
 
-# 6. Rendezt az iris datasetet először Sepal.Length, majd Sepal.Width
-# szerint!
+# 6. Listázd ki V 22. és 23. elemét!
 
-# 7. Számold meg, hány növénynek van 4.4 és 4.8 között (inkluzíve) a
-# Sepal.Length paramétere az iris data frame-ben!
+# 7. Listázd ki V azon elemeit, melyek 30 és 50 között vannak
+#    (inkluzíve)!
 
-# 8. Készíts mátrixot, mely így néz ki:
+# 8. Listázd ki V azon elemeit, melyek 7-tel oszthatók, és rakd be
+#    őket egy X nevű vektorba!
+
+# 9. Listázd ki X utolsó két elemét!
+
+# 10. Hozz létre egy mátrixot, mely így néz ki:
+# 1  2  3  4
+# 5  6  7  8
+# 9 10 11 12
+
+# 11. Számítsd ki a mátrix második oszlopának átlagát!
+
+# 12. Számítsd ki a mátrix harmadik sorának összegét!
+
+# 13. Add össze a mátrix első és harmadik oszlopát, és írasd ki az így
+#     kapott vektort!
+
+# 14. Írd ki egy Y vektorba a mátrix azon elemeit, melyek 7-nél
+#     kisebbek!
+
+# 15. Számítsd ki a 3 különböző fajtájú virágra mind a 4 paraméter
+#     átlagát (iris változó)! Tehát összesen 3*4=12 átlagra van
+#     szükség.
+
+# 16. Ha 4%-os kamatot kapunk évente 250 forintra, akkor 100 év múlva
+#     kamatos kamattal mennyit kapunk vissza?
+
+# 17. A sleep data frame-et rendezd extra szerint.
+
+# 18. Rendezt az iris datasetet először Sepal.Length, majd Sepal.Width
+#     szerint!
+
+# 19. Számold meg, hány növénynek van 4.4 és 4.8 között (inkluzíve) a
+#     Sepal.Length paramétere az iris data frame-ben!
+
+# 20. Készíts mátrixot, mely így néz ki:
 #  1  2  9 10 25 26
 #  4  3  8 11 24 27
 #  5  6  7 12 23 28
