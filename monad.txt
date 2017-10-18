@@ -1,0 +1,216 @@
+Graham Hutton Haskell könyve alapján
+---------------------------------------------------------------
+
+
+Funktorok
+---------------------------------------------------------------
+
+incr :: [Int] -> [Int]
+incr []     = []
+incr [n:ns] = [n+1:incr ns]
+
+sqr :: [Int] -> [Int]
+sqr []     = []
+sqr [n:ns] = [n^2 : sqr ns]
+
+
+map :: (a -> b) [a] -> [b]
+map f [] = []
+map f [x:xs] = [f x : map f xs]
+
+
+inc = map (+1)
+sqr = map (^1)
+
+class Functor f
+where
+  fmap :: (a -> b) (f a) -> f b
+
+
+instace Functor []
+where
+  fmap = map
+
+instance Functor Maybe
+where
+  fmap = ...
+
+
+:: Tree a = Node (Tree a) (Tree a) | Leaf a
+
+
+instance Functor Tree
+where
+  fmap = ...
+
+
+Funktor törvények
+---------------------------------------------------------------
+
+fmap id = id
+fmap (g . h) = famp g . fmap h
+
+
+Ezeket Cleanben nem lehet megadni, tehát elvileg meg tudunk adni
+olyan instance-okat is, melyekre ezek nem teljesülnek.
+
+Eredetileg kategóriaelmélet.
+
+
+Monádok
+---------------------------------------------------------------
+
+:: Expr = Val Int | Div Expr Expr
+
+
+eval :: Expr -> Int
+eval (Val n) = n
+eval (Div x y) = div (eval x) (eval y)
+
+
+Start = eval (Div (Val 1) (Val 0))
+> Floating point exception
+
+-- probléma
+
+safediv :: Int -> Int -> Maybe Int
+safediv _ 0 = Nothing
+safediv n m = Just (n ‘div‘ m)
+
+
+eval :: Expr -> Maybe Int
+eval (Val n) = Just n
+eval (Div x y) = case eval x of
+  Nothing = Nothing
+  Just n  = case eval y of
+    Nothing = Nothing
+    Just m  = safediv n m
+
+
+Start = eval (Div (Val 1) (Val 0))
+> Nothing
+
+
+-- ugyanaz a minta jelenik meg:
+
+(>>=) :: (Maybe a) (a -> Maybe b) -> Maybe b
+mx >>= f = case mx of
+  Nothing = Nothing
+  Just x  = f x
+
+eval :: Expr -> Maybe Int
+eval (Val n) = Just n
+eval (Div x y) = eval x >>= \n ->
+                 eval y >>= \m ->
+                 safediv n m
+
+általános struktúra:
+
+m1 >>= \x1 ->
+m2 >>= \x2 ->
+.
+.
+.
+mn >>= \xn ->
+f x1 x2 ... xn
+
+
+jelölés Haskellben:
+
+do x1 <- m1
+   x2 <- m2
+   .
+   .
+   .
+   xn <- mn
+   f x1 x2 ... x
+
+
+eval :: Expr -> Maybe Int
+eval (Val n) = Just n
+eval (Div x y) = do n <- eval x
+                    m <- eval y
+		    safediv n m
+
+
+class Monad m where
+  return :: a -> m a
+  (>>=)  :: (m a) (a -> m b) -> m b
+
+
+
+instance Monad Maybe where
+  -- (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+  Nothing >>= _ = Nothing
+  (Just x) >>= f = f x
+
+
+instance Monad [] where
+  -- (>>=) :: [a] -> (a -> [b]) -> [b]
+  xs >>= f = [y | x <- xs, y <- f x]
+
+
+pairs :: [a] -> [b] -> [(a,b)]
+pairs xs ys = do x <- xs
+                 y <- ys
+                 return (x,y)
+
+
+> pairs [1,2] [3,4]
+[(1,3),(1,4),(2,3),(2,4)]
+
+
+
+
+State monad
+---------------------------------------------------------------
+
+:: St s a :== s -> (a,s)
+
+doboz, egy state bemenet, ket kimenet
+
+
+masik doboz, ha van bemenet is
+
+  Char -> ST Int
+
+= Char -> State -> (Int,State)
+
+
+instance Functor (St s) where
+  -- fmap :: (a -> b) (ST s a) -> (ST s b)
+  fmap g st = \s -> let (s', x) = st s in (s', g x)
+
+
+
+instance Monad (St s) where
+  return x = \s -> (x, s)
+  -- (>>=) :: (St s a) (a -> St s b) -> St s b
+  st >>= f = \s -> let (s' , x) = st s in f x s'
+
+
+relabel trees with new fresh integer:
+
+
+tree :: Tree Char
+tree = Node  (Leaf 'a') (Node (Leaf 'b') (Leaf 'c'))
+
+
+rlabel :: (Tree a) Int -> (Tree Int, Int)
+rlabel (Leaf _)   n = (Leaf n, n+1)
+rlabel (Node l r) n = (Node l' r', n'')
+  where
+    (l', n') = rlabel l n
+    (r', n'') = rlabel r n'
+
+
+fresh :: St Int Int
+fresh = \n -> (n, n+1)
+
+
+mlabel :: Tree a -> ST (Tree Int)
+mlabel (Leaf _) = do n
+                     return (Leaf n)
+mlabel (Node l r) = do l' <- mlabel l
+                       r' <- mlabel r
+                       return (Node l' r')
