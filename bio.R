@@ -30,10 +30,10 @@
 2^5
 
 # Feladat: hány másodperc van egy évben?
-365*24*60*60
+
 
 # Feladat: a Föld sugara 6378 km. Milyen hosszú az egyenlíto?
-6378*2*pi
+
 
 
 # c) További függvények: sqrt(), abs(), sin(), log10(), log(), exp()
@@ -54,10 +54,10 @@ kerulet <- r*2*pi
 V <- 4*pi/3*r^3
 
 # Feladat: duplázzuk meg V-t és az eredményt rakjuk be V-be!
-V <- V*2
+
 
 # Feladat: felezzük meg V-t és az eredményt tároljuk el V-ben!
-V <- V/2
+
 
 # save-load workspace
 
@@ -76,9 +76,10 @@ v1
 1<=3
 2>=3
 class(1>2)
+
 # Feladat: Több másodperc van -e az évben, mint kilométer a Föld
 # kerületében?
-365*24*60*60 > kerulet
+
 
 
 # g) Vektor: c(), v[i], length(), sum()
@@ -97,11 +98,12 @@ length(heights)
 sum(heights)
 heights[1]
 heights[2]
+
 # Feladat: a heights vektor utolsó elemét tároljuk el egy új változóban (pl. L névvel)
-L <- heights[length(heights)]
+
 
 # Feladat: mi a heights átlaga?
-sum(heights)/length(heights)
+
 
 
 # h) Leíró statisztika: mean(), sd(), var(), range(), min(), max(),
@@ -109,17 +111,19 @@ sum(heights)/length(heights)
 mean(heights)
 heights*2
 heights - 5
+
 # standard szórás: sqrt(sum((heights-sum(heights)/length(heights))^2)/(length(heights)-1))
 sd(heights)
 heights[c(1,2,3)]
+
 # Feladat: a heights három utolsó eleme
-heights[c(length(heights)-2, length(heights)-1, length(heights))]
 
 min(heights)
 max(heights)
 range(heights)
+
 # Feladat: számoljuk ki a tartományt a range függvény nélkül
-c(min(heights), max(heights))
+
 
 quantile(heights)
 ?quantile
@@ -155,18 +159,15 @@ sort(heights)
 plot(sort(heights))
 
 # Feladat: egy tetszolegesen hosszú vektor egymás melletti elemeinek különbsége:
-x<-c(1,3,5,3,1,2,3,1,5,7,9)
+
+
 #   egy parancs, és az eredmény legyen: c(2,2,-2,-2,1,1,-2,4,2,2)
-x[2:length(x)]-x[1:(length(x)-1)]
+
 
 # Feladat: a következo matematikai függvények ábrázolása -5 és 5 x
 # értékek között egy ploton (lásd ?lines) különbözo színekkel: sin,
 # x^2, x^3, exp
-x <- seq(-5,5,0.1)
-plot(x, sin(x), type="l", ylim=c(-3, 5))
-lines(x, x^2, col="red")
-lines(x, x^3, col="green")
-lines(x, exp(x), col="blue")
+
 
 # Feladat: mi az eredmény, a parancs beírása nélkül próbáld meg
 # kitalálni! Utána próbáld ki a parancsot, és magyarázd meg az
@@ -205,14 +206,15 @@ which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
 # Feladat: x-nek hány olyan eleme van, melyek nagyobbak, mint 4?
-length(which(x > 4))
+
 
 # Feladat: x-nak azok az elemei, melyek nagyobbak x átlagánál
-x[which(x > mean(x))]
+
 
 y<-c(2,3,5,7,11,13)
+
 # Feladat: x és y elemei összefuzve, rendezve
-sort(c(c,y))
+
 
 # Feladat: x és y elemei összefuzve, rendezve, de úgy, hogy ne
 # legyenek ismétlodo elemek (használd a unique függvényt)!
