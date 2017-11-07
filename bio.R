@@ -117,7 +117,7 @@ sd(heights)
 heights[c(1,2,3)]
 
 # Feladat: a heights három utolsó eleme
-
+heights[c(length(heights)-2,length(heights)-1,length(heights))]
 min(heights)
 max(heights)
 range(heights)
