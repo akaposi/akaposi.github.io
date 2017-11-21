@@ -1,42 +1,42 @@
 # Tematika
 # 
-# *Ismerkedés az R felülettel
-# Matematikai alapmuveletek, sorozatok, vektorok, mátrixok (=számok
-# táblázatban, csak semmi linalg) létrehozása, alapvetu muveleteik.
+# *Ismerkedes az R felalettel
+# Matematikai alapmuveletek, sorozatok, vektorok, matrixok (=szamok
+# tablazatban, csak semmi linalg) letrehozasa, alapvetu muveleteik.
 # 
-# *Adatok bevitele, egyszeru adatfeldolgozási muveletek
-# Beolvasás fájlból (txt, csv), írás fájlba, a beolvasott adatok
-# egyszeru manipulácója (rendezés, keresés, részmátrixok kijelölése).
+# *Adatok bevitele, egyszeru adatfeldolgozasi muveletek
+# Beolvasas fajlbol (txt, csv), iras fajlba, a beolvasott adatok
+# egyszeru manipulacoja (rendezes, kereses, reszmatrixok kijelolese).
 # 
-# *Adatok vizualizációja
-# Plot, diagramok: kör-, oszlopdiagramok, paraméteretésük.
+# *Adatok vizualizacioja
+# Plot, diagramok: kor-, oszlopdiagramok, parameteretesak.
 # 
-# *Elemi programozás R-ben
-# Elágazás, ciklus, függvény. Használatuk néhány statisztikai feladat
-# megoldása során példákkal (pl. ismerve az elozo évhez viszonyított
-# árszintemelkedést, számoljunk kumulatív változást stb.).
+# *Elemi programozas R-ben
+# Elagazas, ciklus, fuggveny. Hasznalatuk nehany statisztikai feladat
+# megoldasa soran peldakkal (pl. ismerve az elozo evhez viszonyitott
+# arszintemelkedest, szamoljunk kumulativ valtozast stb.).
 # 
-# *Adatelemzés, néhány statisztikai próba
-# Diszkrét eloszlások, nagyon egyszeru próba pl. annak ellenorzésére, hogy
-# egy pénzérme dobássorozata szabályos érmét használva keletkezett-e.
+# *Adatelemzes, nehany statisztikai proba
+# Diszkret eloszlasok, nagyon egyszeru proba pl. annak ellenorzesere, hogy
+# egy penzerme dobassorozata szabalyos ermet hasznalva keletkezett-e.
 
 
-# a) parancssor, parancs, eredmény
+# a) parancssor, parancs, eredmeny
 1+1
 
 
-# b) matematikai függvények: +, -, *, /, ^
+# b) matematikai fuggvenyek: +, -, *, /, ^
 1+2*(3+4)
 2^5
 
-# Feladat: hány másodperc van egy évben?
+# Feladat: hany masodperc van egy evben?
+365*24*60*60
+
+# Feladat: a Fold sugara 6378 km. Milyen hosszu az egyenlito?
+6378*2*pi
 
 
-# Feladat: a Föld sugara 6378 km. Milyen hosszú az egyenlíto?
-
-
-
-# c) További függvények: sqrt(), abs(), sin(), log10(), log(), exp()
+# c) Tovabbi fuggvenyek: sqrt(), abs(), sin(), log10(), log(), exp()
 sqrt(36)
 sin(3.14)
 abs(-5)
@@ -47,22 +47,22 @@ pi
 # d) felfele gomb, Ctrl-R
 
 
-# e) Változók: pi, saját változók, <- (értékadás)
+# e) Valtozok: pi, sajat valtozok, <- (ertekadas)
 r <- 6378
 r
 kerulet <- r*2*pi
 V <- 4*pi/3*r^3
 
-# Feladat: duplázzuk meg V-t és az eredményt rakjuk be V-be!
+# Feladat: duplazzuk meg V-t es az eredmenyt rakjuk be V-be!
+V <- V*2
 
-
-# Feladat: felezzük meg V-t és az eredményt tároljuk el V-ben!
-
+# Feladat: felezzak meg V-t es az eredmenyt taroljuk el V-ben!
+V <- V/2
 
 # save-load workspace
 
 
-# f) Adatosztályok: class(), "numeric", "logical", TRUE, FALSE, "character", hibák
+# f) Adatosztalyok: class(), "numeric", "logical", TRUE, FALSE, "character", hibak
 class(V)
 class(1)
 class("hello")
@@ -77,15 +77,28 @@ v1
 2>=3
 class(1>2)
 
-# Feladat: Több másodperc van -e az évben, mint kilométer a Föld
-# kerületében?
-
-
+# Feladat: Tobb masodperc van -e az evben, mint kilometer a Fold
+# keruleteben?
+365*24*60*60 > 6378*2*pi
 
 # g) Vektor: c(), v[i], length(), sum()
+v <- c(2, 3, 5, 1, 1)
+v[1]
+v[2]
+v[3]
 v[3] <- 10
+v[3]
+v[c(1,2,3)]
+v[c(1,3,5)]
+v[c(1,3,3,3)]
+c(2, 3, 5, 1, 1)[c(1,2,3)]
+v[v]
+# v[v] = v[c(2, 3, 5, 1, 1)] = c(2, 3, 5, 1, 1)[c(2, 3, 5, 1, 1)] = c(3, 5, 1, 2, 2)
 
-v[c(i, j, k)]
+# parancs(param1, param2, param3, ...)
+# +,-,*,/  1+2  +(1, 2)
+# vektor[indexek]
+
 c(142, 194, 160, 171, 169, 154, 168, 164, 172, 188)
 heights <- c(142, 194, 160, 171, 169, 154, 168, 164, 172, 188)
 heights
@@ -99,49 +112,50 @@ sum(heights)
 heights[1]
 heights[2]
 
-# Feladat: a heights vektor utolsó elemét tároljuk el egy új változóban (pl. L névvel)
+# Feladat: a heights vektor utolso elemet taroljuk el egy uj valtozoban (pl. L nevvel)
+L <- heights[length(heights)]
 
+# Feladat: mi a heights atlaga?
+sum(heights)/length(heights)
 
-# Feladat: mi a heights átlaga?
+# Feladat: a heights harom utolso eleme
+heights[c(length(heights)-2,length(heights)-1,length(heights))]
 
-
-
-# h) Leíró statisztika: mean(), sd(), var(), range(), min(), max(),
-#    median(), quantile()
-mean(heights)
+# Vektorok osszeadasa, kivonasa
 heights*2
 heights - 5
+heights^2
 
-# standard szórás: sqrt(sum((heights-sum(heights)/length(heights))^2)/(length(heights)-1))
-sd(heights)
-heights[c(1,2,3)]
+1:4
+c(1,2,3,4)
 
-# Feladat: a heights három utolsó eleme
-heights[c(length(heights)-2,length(heights)-1,length(heights))]
+1:4*3
+(1:4)*3
+1:(4*3)
+
+(1:4)-c(1,1,0,3)
+
+(1:4)*c(1,1,0,3)
+
+heights - heights
+
+# h) Leiro statisztika: mean(), range(), min(), max(),
+#    median()
+mean(heights)
 min(heights)
 max(heights)
 range(heights)
 
-# Feladat: számoljuk ki a tartományt a range függvény nélkül
+# Feladat: szamoljuk ki a tartomanyt a range fuggveny nelkul
+c(min(heights), max(heights))
 
 
-quantile(heights)
-?quantile
-quantile(heights, 0.5)
-quantile(heights, c(0.25, 0.5))
-weights<-c(40, 84, 64, 66, 83, 55, 85, 95, NA, 68)
-quantile(weights)
-quantile(weights, na.rm=TRUE)
-
-
-# i) ?, Függvények több paraméterrel, summary(), fivenum()
+# i) ?, Fuggvenyek tobb parameterrel, summary()
 summary(heights)
 summary(weights)
-fivenum(heights)
-?fivenum
 
 
-# j) Ábrázolás: hist(), plot(), egymás utáni számokból álló vektorok: 1:10
+# j) Abrazolas: hist(), plot(), egymas utani szamokbol allo vektorok: 1:10
 hist(weights)
 ?hist
 hist(weights, breaks=10)
@@ -150,36 +164,61 @@ plot(c(1, 2, 3, 4), c(1^2, 2^2, 3^2, 4^2))
 1:4
 (1:4)+1
 plot(1:100, (1:100)^2)
-plot(1:100, (1:100)^2, type="l")
+plot(1:100, (1:100)^2, type="b")
 
+seq(-5,5,2)
+
+# Feladat: ezt a vektort letrehozni: 1,4,7,10,..., 301 es ebbol
+# vegyetek ki minden masodik elemet. vegeredmeny: 4, 10, 16, 22, ...,
+# 298
+seq(1,301,3)[seq(2,length(seq(1,301,3)),2)]
+
+# Feladat: egy tetszolegesen hosszu vektor egymas melletti elemeinek
+# kulonbsege: egy parancs, es az eredmeny legyen:
+# c(2,2,-2,-2,1,1,-2,4,2,2)
+x<-c(1,3,5,3,1,2,3,1,5,7,9)
+# c(3,5,3,1,2,3,1,5,7,9)-c(1,3,5,3,1,2,3,1,5,7)
+# x[...]-x[...]
+x[2:length(x)] - x[1:(length(x)-1)]
+
+# Feladat: az x^2 fuggveny abrazolasa -5 es 5 x
+# ertekek kozott
+plot(seq(-5,5,0.1), seq(-5,5,0.1)^2)
+
+# Feladat: a kovetkezo matematikai fuggvenyek abrazolasa -5 es 5 x
+# ertekek kozott egy ploton (lasd ?lines) kulonbozo szinekkel: sin,
+# x^2, x^3, exp
 
 # k) sort()
 sort(c(3,1,5,3,2))
 sort(heights)
 plot(sort(heights))
 
-# Feladat: egy tetszolegesen hosszú vektor egymás melletti elemeinek különbsége:
+
+# Vektorok, osszehasonlitas
+x<-c(1,3,5,3,1,2,3,1,5,7,9)
+
+x + 1
+x > 2
+x > (x-1)
+x == x
+x > 2*x-2
+
+2 < x & x < 5
+5 < x | x < 3
 
 
-#   egy parancs, és az eredmény legyen: c(2,2,-2,-2,1,1,-2,4,2,2)
-
-
-# Feladat: a következo matematikai függvények ábrázolása -5 és 5 x
-# értékek között egy ploton (lásd ?lines) különbözo színekkel: sin,
-# x^2, x^3, exp
-
-
-# Feladat: mi az eredmény, a parancs beírása nélkül próbáld meg
-# kitalálni! Utána próbáld ki a parancsot, és magyarázd meg az
-# eredményt!
+# Feladat: mi az eredmeny, a parancs beirasa nelkul probald meg
+# kitalalni! Utana probald ki a parancsot, es magyarazd meg az
+# eredmenyt!
 x<-c(1,3,5,7,9)
 y<-c(2,3,5,7,11,13)
 #   1. x+1
 #   2. y*2
-#   3. length(x) és length(y)
+#   3. length(x) es length(y)
 #   4. x + y
-#   5. sum(x>5) és sum(x[x>5])
-#   6. sum(x>5 | x< 3) # | = vagy, & = és
+#   5. sum(x>5) es sum(x[x>5])
+#   6. sum(x>5 | x< 3) # | = vagy, & = es
 #   7. y[3]
 #   8. y[-3]
 #   9. y[x]
@@ -205,19 +244,19 @@ x[which(x<=4)]
 which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
-# Feladat: x-nek hány olyan eleme van, melyek nagyobbak, mint 4?
+# Feladat: x-nek hany olyan eleme van, melyek nagyobbak, mint 4?
 
 
-# Feladat: x-nak azok az elemei, melyek nagyobbak x átlagánál
+# Feladat: x-nak azok az elemei, melyek nagyobbak x atlaganal
 
 
 y<-c(2,3,5,7,11,13)
 
-# Feladat: x és y elemei összefuzve, rendezve
+# Feladat: x es y elemei osszefuzve, rendezve
 
 
-# Feladat: x és y elemei összefuzve, rendezve, de úgy, hogy ne
-# legyenek ismétlodo elemek (használd a unique függvényt)!
+# Feladat: x es y elemei osszefuzve, rendezve, de ugy, hogy ne
+# legyenek ismetlodo elemek (hasznald a unique fuggvenyt)!
 unique(sort(c(c,y)))
 
 
@@ -234,16 +273,16 @@ x <- 4
 8 %% 3
 9 %% 3
 
-# Feladat: írj egy kifejezést, mely akkor TRUE, ha x páros, különben FALSE
+# Feladat: irj egy kifejezest, mely akkor TRUE, ha x paros, kulonben FALSE
 x %% 2 == 0
 
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
-# Feladat: medián. Egy parancs és csak a sum(), length(), if{}else{}
-# és +,-,*,/ függvények használata
+# Feladat: median. Egy parancs es csak a sum(), length(), if{}else{}
+# es +,-,*,/ fuggvenyek hasznalata
 if (length(x) %% 2 == 0) { mean(sort(x)[c(length(x)/2,length(x)/2+1)]) } else { sort(x)[(length(x)+1)/2] }
 
 
-# l) mátrixok: matrix(), dim, 2D-indexelés: m[i,j], m[i,], m[j,]
+# l) matrixok: matrix(), dim, 2D-indexeles: m[i,j], m[i,], m[j,]
 ?matrix
 m <- matrix(c(3,5,7,5,5,4), ncol=2)
 m
@@ -261,18 +300,18 @@ m[,2]
 m+1
 m*2
 
-# Feladat: add össze a mátrix két oszlopát! Az eredménynek a
-# követezonek kell lennie:
+# Feladat: add ossze a matrix ket oszlopat! Az eredmenynek a
+# kovetezonek kell lennie:
 # [1]  8 10 11
 m[,1]+m[,2]
     
-# Feladat: add meg az alábbi mátrixot (két sor, 200 oszlop) (lásd ?matrix):
+# Feladat: add meg az alabbi matrixot (ket sor, 200 oszlop) (lasd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
 matrix(c(1:200), ncol=100, byrow=TRUE)
 
 
-# m) fájlok beolvasása: read.csv
+# m) fajlok beolvasasa: read.csv
 
 # https://akaposi.github.io/biostatistik/beispiel_daten/tx-24hr.xls
 tx <- read.csv("tx-24hr.csv", na.strings="", stringsAsFactors=F)
@@ -304,18 +343,18 @@ write.csv2(tx[order(tx[,5]),], "tx5.csv")
 
 tx5 <- read.csv2("tx5.csv")
 
-# Feladat: hány nő, hány férfi?
+# Feladat: hany no, hany ferfi?
 sum(tx[,2]=="weiblich")
 length(tx[,2]) - sum(tx[,2]=="weiblich")
 
-# Feladat: hány olyan ember van, aki 1 évnél tovább élt?
+# Feladat: hany olyan ember van, aki 1 evnel tovabb elt?
 sum(tx[,4]>365, na.rm=TRUE)
 
-# Feladat: hány olyan nő van, aki 1 évnél tovább élt?
+# Feladat: hany olyan no van, aki 1 evnel tovabb elt?
 sum(tx[,4]>365 & tx[,2]=="weiblich", na.rm=TRUE)
 
 
-# n) table, pie (kördiagram), barplot (oszlopdiagram)
+# n) table, pie (kordiagram), barplot (oszlopdiagram)
 x <- c(20,10,40,10)
 pie(x)
 barplot(x)
@@ -325,22 +364,22 @@ table(tx[,6])[c(5,1,4,2,3,6,7)]
 pie(table(tx[,6]))
 barplot(table(tx[,6]))
 
-# Feladat: a napok sorrendje jó legyen
+# Feladat: a napok sorrendje jo legyen
 barplot(table(tx[,6])[c(5,1,4,2,3,6,7)])
 
-# Feladat: tx: nemi eloszlás kördiagramon
+# Feladat: tx: nemi eloszlas kordiagramon
 pie(table(tx[,2]))
 
-# Feladat: tx: napi (tag) eloszlás kördiagramon
+# Feladat: tx: napi (tag) eloszlas kordiagramon
 pie(table(tx[,6]))
 
-# Feladat: tx: ábrázold a nok (weiblich) survival.tod hisztogramját!
+# Feladat: tx: abrazold a nok (weiblich) survival.tod hisztogramjat!
 hist(tx[tx[,2]=="weiblich",4])
 
-# Feladat: tx: ábrázold a férfiak (mannlich) survival.tod
-# hisztogramját! Csináld meg, hogy ugyanaz legyen a tengelyeken
-# (breaks, ylim paraméterei a hist függvénynek). Mentsd el ezt és az
-# elozo hisztogramot és rakd oket egymás mellé (pl. Wordben)!
+# Feladat: tx: abrazold a ferfiak (mannlich) survival.tod
+# hisztogramjat! Csinald meg, hogy ugyanaz legyen a tengelyeken
+# (breaks, ylim parameterei a hist fuggvenynek). Mentsd el ezt es az
+# elozo hisztogramot es rakd oket egymas melle (pl. Wordben)!
 
 
 # o) boxplot
@@ -349,75 +388,75 @@ boxplot(tx[, 4])
 ?boxplot
 boxplot(tx[, 4] ~ tx[, 2])
 
-# Feladat: tx: ábrázold boxplot-tal a survival.tod értékét a napszak
-# (tageszeit) függvényében!
+# Feladat: tx: abrazold boxplot-tal a survival.tod erteket a napszak
+# (tageszeit) fuggvenyeben!
 
 
-# Feladat: tx: a táblázatot írd egy tx-new.csv ki survival.tod szerint
-# sorbarendezve (order, write.csv függvények), és nyisd meg Excelben!
+# Feladat: tx: a tablazatot ird egy tx-new.csv ki survival.tod szerint
+# sorbarendezve (order, write.csv fuggvenyek), es nyisd meg Excelben!
 
 
-# Feladat: olvassuk be egy sl nevu változóba:
+# Feladat: olvassuk be egy sl nevu valtozoba:
 # https://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
 
 
-# Feladat: sl: ábrázold az extra értékeket boxplottal a group
-# függvényében!
+# Feladat: sl: abrazold az extra ertekeket boxplottal a group
+# fuggvenyeben!
 
 
-# Feladat: írd ki az iris változót egy fájlba, és nyisd meg Excelben!
+# Feladat: ird ki az iris valtozot egy fajlba, es nyisd meg Excelben!
 
 
 
 ######################################################################
-# Ellenőrző feladatok
+# Ellenorzo feladatok
 ######################################################################
 
-# 1. Írd ki a cars data.frame tartalmát egy autok.csv nevű fájlba, és
-#    olvasd be onnan egy autok nevű változóba!
+# 1. Ird ki a cars data.frame tartalmat egy autok.csv nevu fajlba, es
+#    olvasd be onnan egy autok nevu valtozoba!
 write.csv(cars, "autok.csv")
 autok <- read.csv("autok.csv")
 
-# 2. Számold ki az autok első oszlopának átlagát!
+# 2. Szamold ki az autok elso oszlopanak atlagat!
 mean(autok[,1])
 
-# 3. Számold ki az autok második oszlopának összegét!
+# 3. Szamold ki az autok masodik oszlopanak osszeget!
 sum(autok[,2])
 
-# 4. Ábrázold az autók megállási távolságát a sebesség függvényében,
-#    rakj magyar feliratokat a tengelyekre, az ábra fölé írj címet!
-plot(autok[,2], autok[,3], xlab="sebesség", ylab="távolság", main="Megállási teszt")
+# 4. Abrazold az autok megallasi tavolsagat a sebesseg fuggvenyeben,
+#    rakj magyar feliratokat a tengelyekre, az abra fole irj cimet!
+plot(autok[,2], autok[,3], xlab="sebesseg", ylab="tavolsag", main="Megallasi teszt")
 
-# 5. Hozz létre egy vektort, amelyben 100 elem van, a páros számok
-#    2-től 200-ig! A vektort tárold a V változóban!
+# 5. Hozz letre egy vektort, amelyben 100 elem van, a paros szamok
+#    2-tol 200-ig! A vektort tarold a V valtozoban!
 V <- (1:100)*2
 V <- seq(2,200,2)
 
 V <- 1:200
 V <- V[V%%2 == 0]
 
-# 6. Listázd ki V 22. és 23. elemét!
+# 6. Listazd ki V 22. es 23. elemet!
 V[22]
 V[23]
 V[c(22, 23)]
 V[22:23]
 
-# 7. Listázd ki V azon elemeit, melyek 30 és 50 között vannak
-#    (inkluzíve)!
+# 7. Listazd ki V azon elemeit, melyek 30 es 50 kozott vannak
+#    (inkluzive)!
 V[30<=V & V<=50]
 V[(30<V | V==30) & V<=50]
 (3+2)*5
 3+2*5
 
-# 8. Listázd ki V azon elemeit, melyek 7-tel oszthatók, és rakd be
-#    őket egy X nevű vektorba!
+# 8. Listazd ki V azon elemeit, melyek 7-tel oszthatok, es rakd be
+#    oket egy X nevu vektorba!
 100%%8
 V%%7
 V%%7==0
 V[V%%7==0]
 X <- V[V%%7==0]
 
-# 9. Listázd ki X utolsó két elemét!
+# 9. Listazd ki X utolso ket elemet!
 length(X)
 X[length(X)]
 X[length(X)-1]
@@ -425,7 +464,7 @@ X[c(length(X)-1, length(X))]
 X[(length(X)-1):(length(X))]
 X[13:14]
 
-# 10. Hozz létre egy mátrixot, mely így néz ki:
+# 10. Hozz letre egy matrixot, mely igy nez ki:
 # 1  2  3  4
 # 5  6  7  8
 # 9 10 11 12
@@ -435,36 +474,36 @@ matrix(1:12, ncol=4)
 matrix(1:12, ncol=4, byrow=TRUE)
 M <- matrix(1:12, ncol=4, byrow=TRUE)
 
-# 11. Számítsd ki a mátrix második oszlopának átlagát!
+# 11. Szamitsd ki a matrix masodik oszlopanak atlagat!
 mean(M[,2])
 
-# 12. Számítsd ki a mátrix harmadik sorának összegét!
+# 12. Szamitsd ki a matrix harmadik soranak osszeget!
 sum(M[3,])
 
-# 13. Pontonként add össze a mátrix első és harmadik oszlopát, és írasd ki az így
+# 13. Pontonkent add ossze a matrix elso es harmadik oszlopat, es irasd ki az igy
 #     kapott vektort!
 M[,1]+M[,2]
 
-# 14. Írd ki egy Y vektorba a mátrix azon elemeit, melyek 7-nél
+# 14. Ird ki egy Y vektorba a matrix azon elemeit, melyek 7-nel
 #     kisebbek!
 Y<-M[M<7]
 
-# 15. Számítsd ki a 3 különböző fajtájú virágra mind a 4 paraméter
-#     átlagát (iris változó)! Tehát összesen 3*4=12 átlagra van
-#     szükség.
+# 15. Szamitsd ki a 3 kulonbozo fajtaju viragra mind a 4 parameter
+#     atlagat (iris valtozo)! Tehat osszesen 3*4=12 atlagra van
+#     szakseg.
 
-# 16. Ha 4%-os kamatot kapunk évente 250 forintra, akkor 100 év múlva
+# 16. Ha 4%-os kamatot kapunk evente 250 forintra, akkor 100 ev mulva
 #     kamatos kamattal mennyit kapunk vissza?
 
 # 17. A sleep data frame-et rendezd extra szerint.
 
-# 18. Rendezt az iris datasetet először Sepal.Length, majd Sepal.Width
+# 18. Rendezt az iris datasetet eloszor Sepal.Length, majd Sepal.Width
 #     szerint!
 
-# 19. Számold meg, hány növénynek van 4.4 és 4.8 között (inkluzíve) a
-#     Sepal.Length paramétere az iris data frame-ben!
+# 19. Szamold meg, hany novenynek van 4.4 es 4.8 kozott (inkluzive) a
+#     Sepal.Length parametere az iris data frame-ben!
 
-# 20. Készíts mátrixot, mely így néz ki:
+# 20. Keszits matrixot, mely igy nez ki:
 #  1  2  9 10 25 26
 #  4  3  8 11 24 27
 #  5  6  7 12 23 28
