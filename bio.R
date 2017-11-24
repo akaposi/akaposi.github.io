@@ -183,27 +183,51 @@ x[2:length(x)] - x[1:(length(x)-1)]
 
 # Feladat: az x^2 fuggveny abrazolasa -5 es 5 x
 # ertekek kozott
-plot(seq(-5,5,0.1), seq(-5,5,0.1)^2)
+plot(seq(-5,5,0.1), seq(-5,5,0.1)^2, type="l")
 
 # Feladat: a kovetkezo matematikai fuggvenyek abrazolasa -5 es 5 x
 # ertekek kozott egy ploton (lasd ?lines) kulonbozo szinekkel: sin,
 # x^2, x^3, exp
+plot(seq(-5,5,0.1), sin(seq(-5,5,0.1)), type="l")
+lines(seq(-5,5,0.1), seq(-5,5,0.1)^2, col="red")
+lines(seq(-5,5,0.1), seq(-5,5,0.1)^3, col="green")
+lines(seq(-5,5,0.1), exp(seq(-5,5,0.1)), col="blue", lwd=20)
 
-# k) sort()
+# Maradekos osztas:
+3 %% 2
+4%%2
+
+# Feladat: fafuresz
+plot(c(0,1,1,2,2,3,3,4,4), c(0,1,0,1,0,1,0,1,0), type="l")
+(0:100)%%2
+# 0,0.5,1,1.5,2,2.5
+# 0,0.5,0,0.5,0,0.5
+# 0,1,  1,2,  2,3,  
+plot(seq(0,25,0.5)+(0:50)%%2/2, (0:50)%%2, type="l")
+# HF: fuggoleges furesz
+
+
+# k) sort(), barplot
 sort(c(3,1,5,3,2))
 sort(heights)
-plot(sort(heights))
+plot(heights, ylim=c(0,200))
+plot(sort(heights), ylim=c(0,200))
+barplot(sort(heights), ylim=c(0,200))
 
 
 # Vektorok, osszehasonlitas
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
 
 x + 1
+sin(x)
 x > 2
 x > (x-1)
+x > 1:11
 x == x
 x > 2*x-2
 
+2 < x
+x < 5
 2 < x & x < 5
 5 < x | x < 3
 
@@ -217,12 +241,26 @@ y<-c(2,3,5,7,11,13)
 #   2. y*2
 #   3. length(x) es length(y)
 #   4. x + y
-#   5. sum(x>5) es sum(x[x>5])
+#   4.5 x>5
+#   5. sum(x>5)
+#   5.3 x[c(1,3,3,4)]
+#   5.4 x[c(FALSE, FALSE, TRUE, TRUE, FALSE)]
+#   5.5 x[x>5]
+#   5.6 sum(x[x>5])
 #   6. sum(x>5 | x< 3) # | = vagy, & = es
 #   7. y[3]
 #   8. y[-3]
-#   9. y[x]
+#   9. y[x] = y[c(1,3,5,7,9)] = c(2,5,11)
 #   10. y[y>=7]
+
+# Feladat: x es y azon eleimet tedd be egy V vektorba, melyek 3 es 5 kozott 
+# vannak (inkluzive), es rendezd a vektort!
+sort(c(x[3 <= x & x <= 5], y[3 <= y & y <= 5]))
+
+# Feladat: hany olyan eleme van y-nak, mely x legnagyobb elemenel nagyobb?
+
+
+# Feladat: mi x legnagyobb elemenek indexe?
 
 
 # l) order(), which()
@@ -257,7 +295,7 @@ y<-c(2,3,5,7,11,13)
 
 # Feladat: x es y elemei osszefuzve, rendezve, de ugy, hogy ne
 # legyenek ismetlodo elemek (hasznald a unique fuggvenyt)!
-unique(sort(c(c,y)))
+
 
 
 # k) if, %%
@@ -265,21 +303,19 @@ x <- 3
 if (x>1) { "nagyobb!" } else { "kisebb vagy egyenlo!" }
 x <- 1
 x <- 4
-
-7 %% 2
-8 %% 2
-
-7 %% 3
-8 %% 3
-9 %% 3
+# ujra vegrehajtani az if-es sort
 
 # Feladat: irj egy kifejezest, mely akkor TRUE, ha x paros, kulonben FALSE
-x %% 2 == 0
+
+
+# Feladat: irj egy kifejezest, mely akkor "paros", ha x paros, kulonben "paratlan"
+
+
 
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
 # Feladat: median. Egy parancs es csak a sum(), length(), if{}else{}
 # es +,-,*,/ fuggvenyek hasznalata
-if (length(x) %% 2 == 0) { mean(sort(x)[c(length(x)/2,length(x)/2+1)]) } else { sort(x)[(length(x)+1)/2] }
+
 
 
 # l) matrixok: matrix(), dim, 2D-indexeles: m[i,j], m[i,], m[j,]
@@ -303,12 +339,12 @@ m*2
 # Feladat: add ossze a matrix ket oszlopat! Az eredmenynek a
 # kovetezonek kell lennie:
 # [1]  8 10 11
-m[,1]+m[,2]
+
     
 # Feladat: add meg az alabbi matrixot (ket sor, 200 oszlop) (lasd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
-matrix(c(1:200), ncol=100, byrow=TRUE)
+
 
 
 # m) fajlok beolvasasa: read.csv
@@ -344,14 +380,14 @@ write.csv2(tx[order(tx[,5]),], "tx5.csv")
 tx5 <- read.csv2("tx5.csv")
 
 # Feladat: hany no, hany ferfi?
-sum(tx[,2]=="weiblich")
-length(tx[,2]) - sum(tx[,2]=="weiblich")
+
+
 
 # Feladat: hany olyan ember van, aki 1 evnel tovabb elt?
-sum(tx[,4]>365, na.rm=TRUE)
+
 
 # Feladat: hany olyan no van, aki 1 evnel tovabb elt?
-sum(tx[,4]>365 & tx[,2]=="weiblich", na.rm=TRUE)
+
 
 
 # n) table, pie (kordiagram), barplot (oszlopdiagram)
@@ -365,21 +401,22 @@ pie(table(tx[,6]))
 barplot(table(tx[,6]))
 
 # Feladat: a napok sorrendje jo legyen
-barplot(table(tx[,6])[c(5,1,4,2,3,6,7)])
+
 
 # Feladat: tx: nemi eloszlas kordiagramon
-pie(table(tx[,2]))
+
 
 # Feladat: tx: napi (tag) eloszlas kordiagramon
-pie(table(tx[,6]))
+
 
 # Feladat: tx: abrazold a nok (weiblich) survival.tod hisztogramjat!
-hist(tx[tx[,2]=="weiblich",4])
+
 
 # Feladat: tx: abrazold a ferfiak (mannlich) survival.tod
 # hisztogramjat! Csinald meg, hogy ugyanaz legyen a tengelyeken
 # (breaks, ylim parameterei a hist fuggvenynek). Mentsd el ezt es az
 # elozo hisztogramot es rakd oket egymas melle (pl. Wordben)!
+
 
 
 # o) boxplot
@@ -414,79 +451,56 @@ boxplot(tx[, 4] ~ tx[, 2])
 
 # 1. Ird ki a cars data.frame tartalmat egy autok.csv nevu fajlba, es
 #    olvasd be onnan egy autok nevu valtozoba!
-write.csv(cars, "autok.csv")
-autok <- read.csv("autok.csv")
+
 
 # 2. Szamold ki az autok elso oszlopanak atlagat!
-mean(autok[,1])
+
 
 # 3. Szamold ki az autok masodik oszlopanak osszeget!
-sum(autok[,2])
+
 
 # 4. Abrazold az autok megallasi tavolsagat a sebesseg fuggvenyeben,
 #    rakj magyar feliratokat a tengelyekre, az abra fole irj cimet!
-plot(autok[,2], autok[,3], xlab="sebesseg", ylab="tavolsag", main="Megallasi teszt")
+
 
 # 5. Hozz letre egy vektort, amelyben 100 elem van, a paros szamok
 #    2-tol 200-ig! A vektort tarold a V valtozoban!
-V <- (1:100)*2
-V <- seq(2,200,2)
 
-V <- 1:200
-V <- V[V%%2 == 0]
+
 
 # 6. Listazd ki V 22. es 23. elemet!
-V[22]
-V[23]
-V[c(22, 23)]
-V[22:23]
+
 
 # 7. Listazd ki V azon elemeit, melyek 30 es 50 kozott vannak
 #    (inkluzive)!
-V[30<=V & V<=50]
-V[(30<V | V==30) & V<=50]
-(3+2)*5
-3+2*5
+
 
 # 8. Listazd ki V azon elemeit, melyek 7-tel oszthatok, es rakd be
 #    oket egy X nevu vektorba!
-100%%8
-V%%7
-V%%7==0
-V[V%%7==0]
-X <- V[V%%7==0]
+
 
 # 9. Listazd ki X utolso ket elemet!
-length(X)
-X[length(X)]
-X[length(X)-1]
-X[c(length(X)-1, length(X))]
-X[(length(X)-1):(length(X))]
-X[13:14]
+
 
 # 10. Hozz letre egy matrixot, mely igy nez ki:
 # 1  2  3  4
 # 5  6  7  8
 # 9 10 11 12
-1:12
-matrix(1:12)
-matrix(1:12, ncol=4)
-matrix(1:12, ncol=4, byrow=TRUE)
-M <- matrix(1:12, ncol=4, byrow=TRUE)
+
 
 # 11. Szamitsd ki a matrix masodik oszlopanak atlagat!
-mean(M[,2])
+
 
 # 12. Szamitsd ki a matrix harmadik soranak osszeget!
-sum(M[3,])
+
 
 # 13. Pontonkent add ossze a matrix elso es harmadik oszlopat, es irasd ki az igy
 #     kapott vektort!
-M[,1]+M[,2]
+
 
 # 14. Ird ki egy Y vektorba a matrix azon elemeit, melyek 7-nel
 #     kisebbek!
-Y<-M[M<7]
+
 
 # 15. Szamitsd ki a 3 kulonbozo fajtaju viragra mind a 4 parameter
 #     atlagat (iris valtozo)! Tehat osszesen 3*4=12 atlagra van
@@ -509,4 +523,3 @@ Y<-M[M<7]
 #  5  6  7 12 23 28
 # 16 15 14 13 22 29
 # 17 18 19 20 21 30
-
