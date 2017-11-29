@@ -255,16 +255,21 @@ y<-c(2,3,5,7,11,13)
 
 # Feladat: x es y azon eleimet tedd be egy V vektorba, melyek 3 es 5 kozott 
 # vannak (inkluzive), es rendezd a vektort!
-sort(c(x[3 <= x & x <= 5], y[3 <= y & y <= 5]))
+V <- sort(c(x[3 <= x & x <= 5], y[3 <= y & y <= 5]))
 
 # Feladat: hany olyan eleme van y-nak, mely x legnagyobb elemenel nagyobb?
-
+sum(y > max(x))
 
 # Feladat: mi x legnagyobb elemenek indexe?
-
+(1:length(x))[x == max(x)]
 
 # l) order(), which()
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
+
+# elozo feladat megoldasa maskepp:
+which(x == max(x))
+
+which(c(T,T,F,F,F,T,F))
 
 sort(x)
 
@@ -328,24 +333,39 @@ m[1,1]
 m[1,2]
 m[2,1]
 m[2,2]
+m[3,1]
+m[1,3]
+
 m[1,]
 m[2,]
 m[,1]
 m[,2]
+m[1:2,2]
 
 m+1
 m*2
 
+sum(m > 3)
+
 # Feladat: add ossze a matrix ket oszlopat! Az eredmenynek a
 # kovetezonek kell lennie:
 # [1]  8 10 11
-
+m[,1] + m[,2]
     
 # Feladat: add meg az alabbi matrixot (ket sor, 200 oszlop) (lasd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
+matrix(1:200, ncol=100, byrow=TRUE)
+
+# Feladat: add meg az alabbi matrixot (harom sor)
+#   0   2   4   6 ... 100
+# 102 104 106 108 ... 202
+# 204 206 208 210 ... 304
 
 
+# data.frame
+
+data.frame(nev=c("Bela", "Jozsi", "Bela"), eletkor=c(100, 101, 102), pestie=c(T, T, F))
 
 # m) fajlok beolvasasa: read.csv
 
