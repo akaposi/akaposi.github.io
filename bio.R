@@ -288,20 +288,21 @@ which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
 # Feladat: x-nek hany olyan eleme van, melyek nagyobbak, mint 4?
-
+length(which(x > 4))
 
 # Feladat: x-nak azok az elemei, melyek nagyobbak x atlaganal
-
+x[x > mean(x)]
+x[which(x > mean(x))]
 
 y<-c(2,3,5,7,11,13)
 
 # Feladat: x es y elemei osszefuzve, rendezve
-
+sort(c(x, y))
 
 # Feladat: x es y elemei osszefuzve, rendezve, de ugy, hogy ne
 # legyenek ismetlodo elemek (hasznald a unique fuggvenyt)!
-
-
+unique(sort(c(x, y)))
+sort(unique(c(x, y)))
 
 # k) if, %%
 x <- 3
@@ -311,16 +312,16 @@ x <- 4
 # ujra vegrehajtani az if-es sort
 
 # Feladat: irj egy kifejezest, mely akkor TRUE, ha x paros, kulonben FALSE
-
+x %% 2 == 0
 
 # Feladat: irj egy kifejezest, mely akkor "paros", ha x paros, kulonben "paratlan"
-
+if (x %% 2 == 0) { "parose" } else { "paratlan" }
 
 
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
 # Feladat: median. Egy parancs es csak a sum(), length(), if{}else{}
 # es +,-,*,/ fuggvenyek hasznalata
-
+if (length(x)%%2 == 0) { (x[length(x)/2] + x[length(x)/2+1])/2 } else { x[(length(x)+1)/2] }
 
 
 # l) matrixok: matrix(), dim, 2D-indexeles: m[i,j], m[i,], m[j,]
@@ -370,7 +371,6 @@ data.frame(nev=c("Bela", "Jozsi", "Bela"), eletkor=c(100, 101, 102), pestie=c(T,
 # m) fajlok beolvasasa: read.csv
 
 # https://akaposi.github.io/biostatistik/beispiel_daten/tx-24hr.xls
-tx <- read.csv("tx-24hr.csv", na.strings="", stringsAsFactors=F)
 tx <- read.csv2("tx-24hr.csv", na.strings="", stringsAsFactors=F)
 tx
 head(tx)
@@ -399,8 +399,7 @@ write.csv2(tx[order(tx[,5]),], "tx5.csv")
 
 tx5 <- read.csv2("tx5.csv")
 
-# Feladat: hany no, hany ferfi?
-
+# Feladat: hany no, hany ferfi van?
 
 
 # Feladat: hany olyan ember van, aki 1 evnel tovabb elt?
@@ -408,6 +407,15 @@ tx5 <- read.csv2("tx5.csv")
 
 # Feladat: hany olyan no van, aki 1 evnel tovabb elt?
 
+
+# Feladat: hanyan voltak hetfon (montag) mutve?
+
+
+# Feladat: hany ferfi volt hetfon (montag) vagy kedden (dienstag) mutve?
+
+
+# Feladat: azon ferfiak atlag tulelese, akik hetfon (montag) vagy
+# kedden (dienstag) voltak mutve
 
 
 # n) table, pie (kordiagram), barplot (oszlopdiagram)
