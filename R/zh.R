@@ -95,9 +95,9 @@ height <- rnorm(30, 100, 20)
 #####################################################################
 # 5. feladat
 
-# Toltsuk le a zh-mappabol a jegyek.csv nevu fajlt, es olvassuk be egy
-# D nevu data.frame-be (a fajl elso sora az oszlopok nevet
-# tartalmazza) (4 pont).
+# Toltsuk le a http://akaposi.github.io/R/jegyek.csv nevu fajlt, es
+# olvassuk be egy D nevu data.frame-be (a fajl elso sora az oszlopok
+# nevet tartalmazza) (4 pont).
 
 
 #  Ezutan hajtsuk vegre a kovetkezo muveleteket (2-2 pont):
