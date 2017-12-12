@@ -255,16 +255,21 @@ y<-c(2,3,5,7,11,13)
 
 # Feladat: x es y azon eleimet tedd be egy V vektorba, melyek 3 es 5 kozott 
 # vannak (inkluzive), es rendezd a vektort!
-sort(c(x[3 <= x & x <= 5], y[3 <= y & y <= 5]))
+V <- sort(c(x[3 <= x & x <= 5], y[3 <= y & y <= 5]))
 
 # Feladat: hany olyan eleme van y-nak, mely x legnagyobb elemenel nagyobb?
-
+sum(y > max(x))
 
 # Feladat: mi x legnagyobb elemenek indexe?
-
+(1:length(x))[x == max(x)]
 
 # l) order(), which()
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
+
+# elozo feladat megoldasa maskepp:
+which(x == max(x))
+
+which(c(T,T,F,F,F,T,F))
 
 sort(x)
 
@@ -283,20 +288,21 @@ which(x < 2 | 4 < x)
 x[which(x < 2 | 4 < x)]
 
 # Feladat: x-nek hany olyan eleme van, melyek nagyobbak, mint 4?
-
+length(which(x > 4))
 
 # Feladat: x-nak azok az elemei, melyek nagyobbak x atlaganal
-
+x[x > mean(x)]
+x[which(x > mean(x))]
 
 y<-c(2,3,5,7,11,13)
 
 # Feladat: x es y elemei osszefuzve, rendezve
-
+sort(c(x, y))
 
 # Feladat: x es y elemei osszefuzve, rendezve, de ugy, hogy ne
 # legyenek ismetlodo elemek (hasznald a unique fuggvenyt)!
-
-
+unique(sort(c(x, y)))
+sort(unique(c(x, y)))
 
 # k) if, %%
 x <- 3
@@ -306,16 +312,16 @@ x <- 4
 # ujra vegrehajtani az if-es sort
 
 # Feladat: irj egy kifejezest, mely akkor TRUE, ha x paros, kulonben FALSE
-
+x %% 2 == 0
 
 # Feladat: irj egy kifejezest, mely akkor "paros", ha x paros, kulonben "paratlan"
-
+if (x %% 2 == 0) { "parose" } else { "paratlan" }
 
 
 x<-c(1,3,5,3,1,2,3,1,5,7,9)
 # Feladat: median. Egy parancs es csak a sum(), length(), if{}else{}
 # es +,-,*,/ fuggvenyek hasznalata
-
+if (length(x)%%2 == 0) { (x[length(x)/2] + x[length(x)/2+1])/2 } else { x[(length(x)+1)/2] }
 
 
 # l) matrixok: matrix(), dim, 2D-indexeles: m[i,j], m[i,], m[j,]
@@ -328,29 +334,43 @@ m[1,1]
 m[1,2]
 m[2,1]
 m[2,2]
+m[3,1]
+m[1,3]
+
 m[1,]
 m[2,]
 m[,1]
 m[,2]
+m[1:2,2]
 
 m+1
 m*2
 
+sum(m > 3)
+
 # Feladat: add ossze a matrix ket oszlopat! Az eredmenynek a
 # kovetezonek kell lennie:
 # [1]  8 10 11
-
+m[,1] + m[,2]
     
 # Feladat: add meg az alabbi matrixot (ket sor, 200 oszlop) (lasd ?matrix):
 #   1   2   3   4 ... 100
 # 101 102 103 104 ... 200
+matrix(1:200, ncol=100, byrow=TRUE)
+
+# Feladat: add meg az alabbi matrixot (harom sor)
+#   0   2   4   6 ... 100
+# 102 104 106 108 ... 202
+# 204 206 208 210 ... 304
 
 
+# data.frame
+
+data.frame(nev=c("Bela", "Jozsi", "Bela"), eletkor=c(100, 101, 102), pestie=c(T, T, F))
 
 # m) fajlok beolvasasa: read.csv
 
 # https://akaposi.github.io/biostatistik/beispiel_daten/tx-24hr.xls
-tx <- read.csv("tx-24hr.csv", na.strings="", stringsAsFactors=F)
 tx <- read.csv2("tx-24hr.csv", na.strings="", stringsAsFactors=F)
 tx
 head(tx)
@@ -379,21 +399,48 @@ write.csv2(tx[order(tx[,5]),], "tx5.csv")
 
 tx5 <- read.csv2("tx5.csv")
 
-# Feladat: hany no, hany ferfi?
+# Feladat: hany no (weiblich), hany ferfi (mannlich) van?
+length(tx[,2])
+tx[,2] == "weiblich"
+which(tx[,2] == "weiblich")
+length(which(tx[,2] == "weiblich"))
 
+length(which(tx[,2] == "mannlich"))
 
+1670+1049 == length(tx[,2])
 
-# Feladat: hany olyan ember van, aki 1 evnel tovabb elt?
-
+# Feladat: hany olyan ember van, aki 1 evnel tovabb elt (survival.tod oszlop)?
+length(which(tx[,4]>365))
 
 # Feladat: hany olyan no van, aki 1 evnel tovabb elt?
+(tx[,2] == "weiblich") & (tx[,4]>365)
+length(which((tx[,2] == "weiblich") & (tx[,4]>365)))
 
+# Feladat: hanyan voltak hetfon (montag) mutve?
+length(which(tx[,6] == "montag"))
 
+# Feladat: hany ferfi volt hetfon (montag) vagy kedden (dienstag)
+# mutve?
+length(which((tx[,2] == "mannlich") & ((tx[,6] == "montag") | (tx[,6] == "dienstag"))))
+
+# Feladat: azon ferfiak atlag tulelese, akik hetfon (montag) vagy
+# kedden (dienstag) voltak mutve
+mean(tx[which((tx[,2]=="mannlich")&
+         ((tx[,6]=="montag")|(tx[,6]=="dienstag"))) , 4], na.rm=TRUE)
+
+# hetfon (montag) mutottek atlaga
+mean(tx[which(tx[,6]=="montag"), 4], na.rm=T)
+
+# vasarnap (sonntag) mutottek atlaga
+mean(tx[which(tx[,6]=="sonntag"), 4])
 
 # n) table, pie (kordiagram), barplot (oszlopdiagram)
 x <- c(20,10,40,10)
 pie(x)
 barplot(x)
+
+tx[,6]
+table(tx[,6])
 
 table(tx[,6])[c(5,1,4,2,3,6,7)]
 
@@ -401,23 +448,26 @@ pie(table(tx[,6]))
 barplot(table(tx[,6]))
 
 # Feladat: a napok sorrendje jo legyen
-
+pie(table(tx[,6])[c(5,1,4,2,3,6,7)])
+barplot(table(tx[,6])[c(5,1,4,2,3,6,7)])
 
 # Feladat: tx: nemi eloszlas kordiagramon
+pie(table(tx[,2]))
 
-
-# Feladat: tx: napi (tag) eloszlas kordiagramon
-
+# Feladat: tx: nok napi (tag) eloszlasa kordiagramon
+tx[which(tx[,2]=="weiblich"),6]
+table(tx[which(tx[,2]=="weiblich"),6])
+pie(table(tx[which(tx[,2]=="weiblich"),6]))
 
 # Feladat: tx: abrazold a nok (weiblich) survival.tod hisztogramjat!
-
+hist(tx[which(tx[,2]=="weiblich") , 4])
 
 # Feladat: tx: abrazold a ferfiak (mannlich) survival.tod
 # hisztogramjat! Csinald meg, hogy ugyanaz legyen a tengelyeken
 # (breaks, ylim parameterei a hist fuggvenynek). Mentsd el ezt es az
 # elozo hisztogramot es rakd oket egymas melle (pl. Wordben)!
-
-
+hist(tx[which(tx[,2]=="weiblich") , 4], xlim=c(0,12000), main="no")
+hist(tx[which(tx[,2]=="mannlich") , 4], xlim=c(0,12000), main="ferfi")
 
 # o) boxplot
 hist(tx[, 4])
@@ -427,22 +477,25 @@ boxplot(tx[, 4] ~ tx[, 2])
 
 # Feladat: tx: abrazold boxplot-tal a survival.tod erteket a napszak
 # (tageszeit) fuggvenyeben!
+boxplot(tx[, 4] ~ tx[, 7])
 
+# Feladat: tx: survival.tod a nap fuggvenyeben
+boxplot(tx[, 4] ~ tx[, 6])
 
 # Feladat: tx: a tablazatot ird egy tx-new.csv ki survival.tod szerint
 # sorbarendezve (order, write.csv fuggvenyek), es nyisd meg Excelben!
-
+write.csv2(tx[order(tx[,4]), ], "tx-new.csv")
 
 # Feladat: olvassuk be egy sl nevu valtozoba:
 # https://akaposi.github.io/biostatistik/beispiel_daten/sleep.xls
-
+sl <- read.csv2("sleep.csv")
 
 # Feladat: sl: abrazold az extra ertekeket boxplottal a group
 # fuggvenyeben!
-
+boxplot(sl[,1] ~ sl[,2])
 
 # Feladat: ird ki az iris valtozot egy fajlba, es nyisd meg Excelben!
-
+write.csv2(iris, "iris.csv")
 
 
 ######################################################################
@@ -451,56 +504,79 @@ boxplot(tx[, 4] ~ tx[, 2])
 
 # 1. Ird ki a cars data.frame tartalmat egy autok.csv nevu fajlba, es
 #    olvasd be onnan egy autok nevu valtozoba!
-
+write.csv(cars, "autok.csv")
+autok <- read.csv("autok.csv")
 
 # 2. Szamold ki az autok elso oszlopanak atlagat!
-
+mean(autok[,1])
 
 # 3. Szamold ki az autok masodik oszlopanak osszeget!
-
+sum(autok[,2])
 
 # 4. Abrazold az autok megallasi tavolsagat a sebesseg fuggvenyeben,
 #    rakj magyar feliratokat a tengelyekre, az abra fole irj cimet!
-
+plot(autok[,2], autok[,3], xlab="sebesség", ylab="távolság", main="Megállási teszt")
 
 # 5. Hozz letre egy vektort, amelyben 100 elem van, a paros szamok
 #    2-tol 200-ig! A vektort tarold a V valtozoban!
+V <- (1:100)*2
+V <- seq(2,200,2)
 
-
+V <- 1:200
+V <- V[V%%2 == 0]
 
 # 6. Listazd ki V 22. es 23. elemet!
-
+V[22]
+V[23]
+V[c(22, 23)]
+V[22:23]
 
 # 7. Listazd ki V azon elemeit, melyek 30 es 50 kozott vannak
 #    (inkluzive)!
-
+V[30<=V & V<=50]
+V[(30<V | V==30) & V<=50]
+(3+2)*5
+3+2*5
 
 # 8. Listazd ki V azon elemeit, melyek 7-tel oszthatok, es rakd be
 #    oket egy X nevu vektorba!
-
+100%%8
+V%%7
+V%%7==0
+V[V%%7==0]
+X <- V[V%%7==0]
 
 # 9. Listazd ki X utolso ket elemet!
-
+length(X)
+X[length(X)]
+X[length(X)-1]
+X[c(length(X)-1, length(X))]
+X[(length(X)-1):(length(X))]
+X[13:14]
 
 # 10. Hozz letre egy matrixot, mely igy nez ki:
 # 1  2  3  4
 # 5  6  7  8
 # 9 10 11 12
-
+1:12
+matrix(1:12)
+matrix(1:12, ncol=4)
+matrix(1:12, ncol=4, byrow=TRUE)
+M <- matrix(1:12, ncol=4, byrow=TRUE)
 
 # 11. Szamitsd ki a matrix masodik oszlopanak atlagat!
-
+mean(M[,2])
 
 # 12. Szamitsd ki a matrix harmadik soranak osszeget!
-
+sum(M[3,])
 
 # 13. Pontonkent add ossze a matrix elso es harmadik oszlopat, es irasd ki az igy
 #     kapott vektort!
-
+M[,1]+M[,2]
 
 # 14. Ird ki egy Y vektorba a matrix azon elemeit, melyek 7-nel
 #     kisebbek!
-
+Y<-M[M<7]
 
 # 15. Szamitsd ki a 3 kulonbozo fajtaju viragra mind a 4 parameter
 #     atlagat (iris valtozo)! Tehat osszesen 3*4=12 atlagra van
