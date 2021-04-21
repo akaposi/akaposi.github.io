@@ -3,7 +3,8 @@ import Prelude hiding (map, sqr)
 {-
 Kaposi Ambrus
 Funktorok, monádok
-Graham Hutton Haskell könyv, https://wiki.haskell.org/Typeclassopedia
+Kolozsvár, 2021.03.31.
+forras: Graham Hutton Haskell könyv, https://wiki.haskell.org/Typeclassopedia
 
 1. Funktor
 -----------------------------
