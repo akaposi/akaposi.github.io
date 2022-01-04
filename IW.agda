@@ -64,3 +64,33 @@ module Red {I : Set}(S : I → Set)(P : ∀{i} → S i → Set)
     elimIWβ' : ∀{i}{s : S i}{f : (p : P s) → IW' (out p)}
              → elimIW' (sup' s f) ≡ supᴾ λ p → elimIW' (f p)
     elimIWβ' = refl
+
+module Red' {I : Set}(S : I → Set)(P : ∀{i} → S i → Set)
+  (out : ∀{i}{s : S i} → P s → I) where
+  -- from http://hott.github.io/HoTT/timing-html/HoTT.Types.IWType.html
+  -- A = S', B = P', 
+
+  S' : Set
+  S' = Σ I S
+
+  P' : S' → Set
+  P' (i ,Σ s) = P s
+
+  Pre : Set
+  Pre = W S' P'
+
+  i : S' → I
+  i = proj₁
+  
+  j : ∀ x → P' x → I
+  j x = out
+
+  isIndexedBy : I → Pre → Set
+  isIndexedBy x (sup a b) = (i a ≡ x) × (∀ c → isIndexedBy (j a c) (b c))
+
+  IW' : I → Set
+  IW' x = Σ Pre (isIndexedBy x)
+
+  -- this is almost the same as the above construction and it also
+  -- gives definitional computation rules and does not need function
+  -- extensionality
