@@ -68,7 +68,8 @@ module Red {I : Set}(S : I → Set)(P : ∀{i} → S i → Set)
 module Red' {I : Set}(S : I → Set)(P : ∀{i} → S i → Set)
   (out : ∀{i}{s : S i} → P s → I) where
   -- from http://hott.github.io/HoTT/timing-html/HoTT.Types.IWType.html
-  -- A = S', B = P', 
+  -- which copied from https://github.com/jashug/IWTypes/blob/master/ReduceIWtoW.v
+  -- A = S', B = P'
 
   S' : Set
   S' = Σ I S
