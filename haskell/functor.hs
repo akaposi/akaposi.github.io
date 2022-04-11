@@ -1,6 +1,15 @@
 import Prelude hiding (map, sqr)
 
 {-
+tartalom:
+funktor peldak: lista, tree, masiktree
+induktiv tipusok fak
+tovabbi tipusfuggvenyek (* -> * elemei), (,a), (->a), Either ezek kozul mik funktorok
+funktor torvenyek, ellenpeldak
+tipusfuggvenyek, amik nem funktorok
+-}
+
+{-
 Kaposi Ambrus
 Funktorok, monádok
 Kolozsvár, 2021.03.31.
