@@ -1,0 +1,104 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <p id="question">Ide jön a kérdés</p>
+    <input type="text" id="input" onkeyup="validate()">
+    <button onclick="step()" id="submit">Beküld</button>
+    <p>Eddigi pontszámod: <span id="points"></span></p>
+    <script>
+      let counter = 0;
+      let points = 0;
+      let questions = [
+          "Futtasd a KKK programot! Mi lesz a végeredmény?",
+          "Futtasd a KSK programot! Mi lesz a végeredmény?",
+          "Futtasd az SKK(KK) programot! Mi lesz a végeredmény? (Vigyázz, két lépésben kapsz végeredményt!)",
+          "Futtasd az S(KSK) programot! Mi lesz a végeredmény? (A KSK rész futtatható, a legelső S ott marad.)",
+          "Futtasd a K(K(KK)) programot! Mi a végeredmény? (Trükkös.)",
+          "Futtasd a KKKKKKKKKK programot! (10 db K egymás után írva, teljesen balra zárójelezve.) Mi a végeredmény?",
+          "Futtasd a KKKKKKKKKKK programot! (11 db K egymás után írva, teljesen balra zárójelezve.) Mi a végeredmény?",
+          "Futtasd a K(K(KKK)) programot! Mi a végeredmény?",
+          "KKK = KKS? Válaszolj igen-nel vagy nem-mel!",
+          "KKKK = KK? Válaszolj igen-nel vagy nem-mel!",
+          "KKKKK = KK? Válaszolj igen-nel vagy nem-mel!",
+          "Meg szeretnénk adni egy I programot, melyre Ix = x teljesül. Mi legyen I? (Tipp: három betűből áll, balra van zárójelezve. Gondold át, hogy ezek közül melyik lehet!)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br><br>Adj meg egy J programot, amire teljesül, hogy Jx = x, de J ≠ I!",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br><br>Add meg a D (duplázó) programot, melyre Dx = xx! (Tipp: gondold át, hogy K-val vagy S-sel tudunk-e duplázni! Használd fel az I-t!)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>Futtasd a DD = SII(SII) programot! Mi lesz a végeredmény? (Vigyázz, ez meglepő!)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>F és G programok viselkedés szerint megegyeznek, ha van olyan n>=0 egész szám, hogy minden x₁,...,xₙ programra Fx₁...xₙ = Gx₁...xₙ. Például SKS és SKK viselkedés szerint megegyeznek (n=1). Viselkedés szerint egyezőek-e az alábbi programok: K és S? Válaszolj igen-nel vagy nem-mel!",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>F és G programok viselkedés szerint megegyeznek, ha van olyan n>=0 egész szám, hogy minden x₁,...,xₙ programra Fx₁...xₙ = Gx₁...xₙ. Például SKS és SKK viselkedés szerint megegyeznek (n=1). Viselkedés szerint egyezőek-e az alábbi programok: KK és K? Válaszolj igen-nel vagy nem-mel!",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>F és G programok viselkedés szerint megegyeznek, ha van olyan n>=0 egész szám, hogy minden x₁,...,xₙ programra Fx₁...xₙ = Gx₁...xₙ. Például SKS és SKK viselkedés szerint megegyeznek (n=1). Viselkedés szerint egyezőek-e az alábbi programok: S(KK)I és K? Válaszolj igen-nel vagy nem-mel!",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>F és G programok viselkedés szerint megegyeznek, ha van olyan n>=0 egész szám, hogy minden x₁,...,xₙ programra Fx₁...xₙ = Gx₁...xₙ. Például SKS és SKK viselkedés szerint megegyeznek (n=1). El lehet-e dönteni tetszőleges két programról, hogy viselkedés szerint egyezőek-e?",
+
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br><br>Gondold át, hogy mit csinál az F = S(K(SI))K program két bemeneten! Mi lesz a végeredménye Fxy futtatásának tetszőleges x-re és y-ra?",
+
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br><br>Add meg a 0 programot, melyre 0fx = x! (Tipp: elég két betű.)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br><br>Add meg az M programot, melyre Mnfx = f(nfx)! (Tipp: gondolkozzunk visszafele: f(nfx) = Bf(nf)x = ??nfx.)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br>Mnfx = f(nfx). M = SB = S(S(KS)K)<br><br>Mi lesz M0fx végeredménye? (Itt f és x tetszőleges program.)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br>Mnfx = f(nfx). M = SB = S(S(KS)K)<br><br>Mi lesz M(M0)fx végeredménye? (Itt f és x tetszőleges program.)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br>Mnfx = f(nfx). M = SB = S(S(KS)K)<br><br>Mi lesz M(M(M0))fx végeredménye? (Itt f és x tetszőleges program.)",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br>Mnfx = f(nfx). M = SB = S(S(KS)K)<br><br>Így ábrázoljuk a természetes számokat kombinátor logikában: n az a program, amely az első bemenetét n-szer alkalmazza a másodikra. Most adjuk meg az összeadást! Tehát ez egy olyan Ö program lesz, melyre Öabfx = af(bfx). Gondold át, hogy ez miért jó definíció! Most adjuk meg visszafele: af(bfx) = B(af)(bf)x = BBad(bf)x = S(BBa)bfx = ??????abfx. Mi legyen tehát Ö?",
+          "Eddigi programok:<br>Bfgx = f(gx). B = S(KS)K<br>Ix = x. I = SKK<br>Dx = xx. D = SII = S(SKK)(SKK)<br>Fxy = yx. F = S(K(SI))K = S(K(S(SKK)))K<br>0fx = x. 0 = SK<br>Mnfx = f(nfx). M = SB = S(S(KS)K)<br><br>Most megadjuk az összeadást másképpen: elég, ha Ömn = mMn, hiszen mMn ugyanaz, mint M-et (tehát a rákövetkezőt) m-szer alkalmazni n-re. Mi legyen ez az Ö?",
+      ];
+      let answers = [
+          ["k"],
+          ["s"],
+          ["kk"],
+          ["ss"],
+          ["k(k(kk))"],
+          ["kk"],
+          ["k"],
+          ["k(kk)","k(k(k))","(k(k(k)))"],
+          ["igen"],
+          ["igen"],
+          ["nem"],
+          ["skk","(sk)k","((sk)k)","(skk)","sks"],
+          ["sks","k(skk)"],
+          ["s(skk)(skk)"],
+          ["s(skk)(skk)(s(skk)(skk))","(s(skk)(skk))(s(skk)(skk))"],
+          ["nem"],
+          ["nem"],
+          ["igen"],
+          ["nem"],
+
+          ["yx"],
+          
+          ["sk","k(skk)","k(sks)"],
+          ["s(s(ks)k)"],
+          ["fx"],
+          ["f(fx)"],
+          ["f(f(fx))"],
+          ["s(ks)ks(s(ks)k(s(ks)k))","s(ks)ks((s(ks)k)(s(ks)k))","(s(ks)ks)((s(ks)k)(s(ks)k))","(s(ks)ks)(s(ks)k(s(ks)k))","bs(bb)"],
+          ["fm","f(sb)","s(k(s(skk)))k(s(s(ks)k))"],
+      ];
+      document.querySelector("#question").innerHTML = questions[0];
+      document.querySelector("#points").innerHTML = points;
+      function step() {
+          if (answers[counter].includes(document.querySelector("#input").value.toLowerCase()))
+              points++;
+          counter++;
+          document.querySelector("#points").innerHTML = points;
+          
+          if (counter < questions.length) {
+              document.querySelector("#question").innerHTML = questions[counter];
+          } else {
+              document.querySelector("#question").innerHTML = "Vége.";
+              let elem = document.querySelector("#submit"); elem.parentNode.removeChild(elem);
+              elem = document.querySelector("#input"); elem.parentNode.removeChild(elem);
+          }
+      }
+      function validate() {
+          let str = document.querySelector("#input").value.toLowerCase();
+          let valid = true;
+          let allowed = ['k','s','(',')'];
+          for (let i = 0; i < str.length; i++) {
+              if (!(allowed.includes(str[i])))
+                  valid = false;
+          }
+          if (str == "igen" || str == "nem" || (str == "yx" && counter == 19) || (str == "fx" && counter == 22) || (str == "f(fx)" && counter == 23) || (str == "f(f(fx))" && counter == 24) || (str == "bs(bb)" && counter == 25) || (str == "fm" && counter == 26))
+              valid = true;
+          document.getElementById("submit").disabled = !valid;
+      }
+    </script>
+  </body>
+</html>
