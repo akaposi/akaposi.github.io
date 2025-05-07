@@ -1,0 +1,325 @@
+* Proof as code
+Ambrus Kaposi
+ELTE, Faculty of Informatics, Dept. of Programming Languages and Compilers
+
+Based on:
+A.K., Zoltán Molnár. Mi az a típuselmélet és mire jó?
+To appear in: https://ematlap.hu, Mar 2025
+** Abstract
+Martin-Löf's type theory combines ideas from Hilbert's formalism,
+Brouwer's intuitionism and Russell's theory of types. In this talk, I
+will explain how terms in Martin-Löf's type theory can represent proofs
+and how they can be executed as programs. I will also compare the
+set-theoretic and type-theoretic foundations of mathematics, and present
+an open problem for foundations.
+** Origins
+Contradictions in Cantor's naive set theory
+
+Responses:
+- intuitionism by Brouwer
+- formalism by Hilbert
+- theory of types by Russell
+Pragmatic answers: ZF, NBG
+
+Church, lambda calculus
+Curry, simply typed lambda calculus
+
+Martin-Löf, universe,  U₀ : U₁ : U₂ : U₃ : ..., Σ
+Girard, System F, polymorphic lambda calculus
+Coquand impredicative propositions
+Voevodsky (Hofmann-Streicher, Makkai Mihaly FOLDS)
+
+Modern type theory (starting from Per Martin-Löf 1970s) combines all
+of them:
+- it is constructive/intuitionistic in the sense of Brouwer
+- proof assistant implementations, (de)formalisation
+- it is based on the notion of type coming from Russell
+
+Is type theory vs. set theory interesting for non-philosophers?
+** Computer proof assistants
+Assist the mathematician in writing down a proof and check its
+correctness. These are almost all based on type theory: Agda, Coq,
+Isabelle/HOL, Lean. Exception: Mizar.
+
+Example mathematician users:
+- Voevodsky: finds a mistake in his proof 24 years after
+  publication
+- Scholze: his proof is so technical that even he doubts its
+  correctness
+- Tao: use the people of the internet to come up with new mathematics
+  C set
+  + : C×C → C
+  ∀x y.x=y
+  ass : (x+y)+z = x+(y+z)
+  ∀x.x=x
+- Holmes: couldn't wait for the reviewers
+- Buzzard: annoyed by having to wait 17 years after refutation to
+  revoke a paper (Annals of Mathematics)
+** Type theory vs. set theory
+
+   x : A   instead of   x ∈ A
+   ↑   ↑                ↑   ↑
+ term  type            set  set
+
+   (like in f : A → B)
+** Representation-independence
+*** High level language
+set theory   vs. type theory
+----------------------------
+machine code vs. Python
+
+Benacerraf. What Numbers Could not Be (1965)
+- Zermelo:     ∅, {∅}, {{∅}}, ...
+- von Neumann: ∅, {∅}, {∅,{∅}}, ...
+
+ℕ in type theory is like working in Peano arithmetic: no need for
+"coding".
+*** Fable by Reynolds (1983)
+Once upon a time, there was a university with a peculiar tenure
+policy. All faculty were tenured, and could only be dismissed for
+moral turpitude: making a false statement in class. Needless to say,
+the university did not teach computer science. However, it had a
+renowned department of mathematics.
+
+One semester, there was such a large enrollment in complex variables
+that two sections were scheduled. In one section, Professor Descartes
+announced that a complex number was an ordered pair of reals, and that
+two complex numbers were equal when their corresponding components
+were equal. He went on to explain how to convert reals into complex
+numbers, what "i" was, how to add, multiply, and conjugate complex
+numbers, and how to find their magnitude.
+
+In the other section, Professor Bessel announced that a complex number
+was an ordered pair of reals the first of which was nonnegative, and
+that two complex numbers were equal if their first components were
+equal and either the first components were zero or the second
+components differed by a multiple of 2π. He then told an entirely
+different story about converting reals, "i", addition, multiplication,
+conjugation and magnitude.
+
+Then, after their first classes, an unfortunate mistake in the
+registrar's office caused the two sections to be interchanged. Despite
+this, neither Descartes nor Bessel ever committed moral turpitude,
+even though each was judged by the other's definitions. The reason was
+that they both had an intuitive understanding of type. Having defined
+complex numbers and the primitive operations upon them, thereafter
+they spoke at a level of abstraction that encompassed both of their
+definitions.
+
+The moral of this fable is that:
+
+  Type structure is a syntactical discipline for enforcing levels of
+  abstraction.
+*** Structuralism
+If two sets are in bijection (two structures are isomorphic), there
+should be no way to distinguish them (Bourbaki).
+
+In set theory, {0,1} and {1,2} are distinguished by 0∈_.
+
+If M ≅ N are isomorphic monoids and M has some nice property (e.g.
+commutative, finite), so does N.
+
+In type theory, there is no
+
+  ∪, ∩, ∈.
+
+Can you even formalise mathematics without these?
+- Russell. Mathematical logic as based on the theory of types (1908)
+- Lean's mathlib (Buzzard et al)
+*** Technical differences
+┌───────────────────┐   ┌───────────────────┐
+│ FOL    ∧,∨,⊃,∀,∃  │   │ ML Type Theory    │
+│                   │   │                   │
+│  ┌──────────────┐ │   │       x : A       │
+│  │ axioms of    │ │   │                   │
+│  │ set theory   │ │   │  ┌──────────────┐ │
+│  │              │ │   │  │ propositions │ │
+│  │    x ∈ A     │ │   │  │ as types     │ │
+│  │              │ │   │  │              │ │
+│  └──────────────┘ │   │  │ ∧,∨,⊃,∀,∃    │ │
+│                   │   │  └──────────────┘ │
+└───────────────────┘   └───────────────────┘   (from Mike Shulman)
+
+0 ∈ 2 is a proposition  0 : 2 is grammatically 
+                        ill-formed
+1 ∈ ∀ is grammatically
+ill-formed
+
+∈ is dynamic info       x : A is static info
+
+ℕ ⊂ ℤ                   i:ℕ, then i:ℤ does not
+                        hold
+
+both subsets and        subsets are characteristic functions
+characteristic fcts     e.g. isNonNeg : ℤ → Bool
+*** Propositions as types
+| P ⊃ Q                             | P → Q       | prop     | Heyting
+| P ∧ Q                             | P × Q       | prop     |
+| P ∨ Q                             | P ⊎ Q       | prop     |
+| ⊤                                 | Unit        | prop     |
+| ⊥                                 | Empty       | prop     |
+| ∀x∈ℕ.R(x)                         | Π(x:ℕ).R(x) | prop     |
+| ∃x∈ℕ.R(x)                         | Σ(x:ℕ).R(x) | prop     |
+| 3=2                               | 3=2         | prop     |
+|-----------------------------------+-------------+----------|
+| Zermelo/von Neumann encoding of ℕ | Peano ℕ     | set      |
+| set of ordered pairs ℕ×ℕ          | ℕ × ℕ       | set      |
+| subset of ℕ×ℕ with some property  | ℕ → ℕ       | set      |
+|-----------------------------------+-------------+----------|
+| external/class                    | monoid      | groupoid |
+
+Σ(n:ℕ).ℝⁿ = {(n,u) | n∈ℕ , u∈ℝⁿ}
+
+∥_∥ : Type → Proposition
+∃x∈ℕ.n>3 := ∥ Σ(n:ℕ).n>3 ∥
+Σ(n:ℕ).n>3 is not a proposition
+∥ Σ(n:ℕ).n=3 ∥ is a proposition
+
+** Constructivity
+*** History
+Classical math: law of excluded middle, axiom of choice.
+
+Type theory is more general: you can choose to be classical or
+not. Without classical principles, there are no axioms in type theory!
+
+Examples:
+- ∀x,y∈ℕ.  ∃z∈ℕ.  z∣x ∧ z∣y ∧ ∀z'∈ℕ.  z'∣x ∧ z'∣y ⊃ z'≤z
+  Π(x,y:ℕ).Σ(z:ℕ).z∣x × z∣y × Π(z':ℕ).z'∣x × z'∣y → z'≤z
+- In type theory, proving 1+1 = 2 is the same as proving 2 = 2.
+Canonicity: given a t : ℕ, t=0 or t=1 or t=2 or t=3 or ...
+
+Not all computer programs can be represented in type theory.
+
+Hilbert (1927):
+
+  Taking the Principle of the Excluded Middle from the mathematician
+  is the same as prohibiting the boxer the use of his fists.
+
+Bishop: Constructive analysis 1967
+- injectivity: x≠y → f(x)≠f(y)    vs. f(x)=f(y) → x=y
+- Bolzano's theorem
+Homotopy type theory (2013):
+- Cauchy sequences without choice
+*** Proof as code
+┌───────────────────┐   ┌───────────────────┐
+│ FOL    ∧,∨,⊃,∀,∃  │   │ ML Type Theory    │
+│                   │   │                   │
+│  ┌──────────────┐ │   │       x : A       │
+│  │ axioms of    │ │   │                   │
+│  │ set theory   │ │   │  ┌──────────────┐ │
+│  │              │ │   │  │ propositions │ │
+│  │    x ∈ A     │ │   │  │ as types     │ │
+│  │              │ │   │  │              │ │
+│  └──────────────┘ │   │  │ ∧,∨,⊃,∀,∃    │ │
+│                   │   │  └──────────────┘ │
+└───────────────────┘   └───────────────────┘
+
+| Proofs in logic                           | Type theory                  |
+|-------------------------------------------+------------------------------|
+| Hilbert style proof theory of prop.logic  | SK combinator calculus       |
+| Gentzen's natural deduction of prop.logic | simply typed lambda calculus |
+| Natural deduction style FOL proof theory  | Martin-Löf type theory       |
+*** Hilbert vs. Schönfinkel
+Hilbert's system                 Simply typed Schönfinkel SK combinator calculus
+
+P ⊃ Q    P                       t : P → Q     u : P
+──────────                       ───────────────────
+    Q                                  t u : Q
+
+ax1 : P ⊃ (Q ⊃ P)                K : P → (Q → P)
+ax2 : (P⊃(Q⊃R))⊃(P⊃Q)⊃P⊃R        S : (P→Q→R)→(P→Q)→P→R
+                                 Kβ : (K u) v = u
+                                 Sβ : S f g u = f u (g u)
+
+∧intro : P ⊃ Q ⊃ P ∧ Q           _,_ : P → Q → P × Q
+∧elim₁ : P ∧ Q ⊃ P               fst : P × Q → P
+∧elim₂ : P ∧ Q ⊃ Q               snd : P × Q → Q
+                                 ×β₁ : fst (p , q) = p
+                                 ×β₂ : snd (p , q) = q
+
+                                 There is an untyped version (the
+                                 simplest Turing-complete language).
+*** Gentzen vs. Church
+Gentzen's natural deduction      Church's simply typed lambda calculus
+
+Γ ⊢ P ⊃ Q    Γ ⊢ P               Γ ⊢ t : P → Q    Γ ⊢ u : P 
+──────────────────               ────────────────────────── 
+      Γ ⊢ Q                              Γ ⊢ t u : Q        
+
+ Γ,P ⊢ Q                           Γ,x:P ⊢ t : Q
+─────────                        ────────────────
+Γ ⊢ P ⊃ Q                        Γ ⊢ λx.t : P ⊃ Q
+
+                                 (λx.t) u = t[x↦u]
+
+
+Γ ⊢ P    Γ ⊢ Q                   Γ ⊢ u : P    Γ ⊢ v : Q
+──────────────                   ──────────────────────
+  Γ ⊢ P ∧ Q                        Γ ⊢ (u,v) : P × Q
+
+Γ ⊢ P ∧ Q     Γ ⊢ P ∧ Q          Γ ⊢ t : P × Q    Γ ⊢ t : P × Q
+─────────     ─────────          ─────────────    ─────────────
+  Γ ⊢ P         Γ ⊢ Q            Γ ⊢ fst t : P    Γ ⊢ snd t : Q
+
+                                 fst (u , v) = u
+                                 snd (u , v) = v
+** Extensionality
+In set theory: if two sets have the same elements, they are equal.
+
+This does not make sense in type theory (an element only belongs to a
+single type).
+
+Voevodsky's univalence: if there is a bijection between A and B, then
+they are equal.
+
+Consequence: equality is not always a proposition!
+
+A is a proposition if for all a,a':A, there is an element of the type a = a'.
+A is a set         if for all a,a':A, a = a' is a proposition.
+A is a groupoid    if for all a,a':A, a = a' is a set.
+...
+
+e1 : {0,1} = {2,3}    e1 : {0,1} → {2,3}   e1(0):=2, e1(1):=3
+e2 : {0,1} = {2,3}    e2 : {0,1} → {2,3}   e1(0):=3, e1(1):=2
+
+ℕ = ℕ
+
+
+Propositions: 2 =_ℕ 3,  (x↦x+1) =_{ℕ→ℕ} (x↦1+x),  (2,1) =_{ℕ×ℕ} (1,2)
+Sets: ℕ,  ℕ → ℕ,  ℕ × ℕ,  ℝ,  ℕ → ℝ
+Groupoids: set, magma, monoid, group, ring.
+*** Models of univalence?
+A is a type       A is a topological space (up to homotopy)
+a, a' : A         a, a' are points in the space
+e : a =_A a'      e is a path in the space
+
+We use abstract notions of space: simplicial sets, cubical sets.
+
+Univalence was originally an axiom (just like the law of excluded
+middle). This is called homotopy type theory / univalent foundations.
+
+Coquand et al developed a type theory based on the cubical set model
+(cubical type theory, cubical Agda).
+- There is an abstract interval type 𝕀 with 0,1 : 𝕀
+- a =_A a' is defined as f : 𝕀 → A such that f(0)~~~>a and f(1)~~~>a'
+- Then there are operations filling arbitrary dimensional cubes
+- Univalence is provable! Everything computes.
+
+A foundation of mathematics should be explainable using
+pre-mathematical intuitions.
+
+Is there a type theory where equality is explainable, univalence is
+provable and everything computes?
+** References
+Ambrus Kaposi, Zoltán Molnár. Mi az a típuselmélet és mire jó? To
+appear in: https://ematlap.hu, Mar 2025
+
+Thorsten Altenkirch. Should Type Theory Replace Set Theory as the
+Foundation of Mathematics? Glob. Philosophy 33, 21
+(2023). https://doi.org/10.1007/s10516-023-09676-0
+
+Steve Awodey. Structuralism, Invariance, and Univalence. Philosophia
+Mathematica 22 (1):1-11 (2014)
+https://www.andrew.cmu.edu/user/awodey/preprints/siu.pdf
+
+Homotopy type theory book. https://homotopytypetheory.org/book
