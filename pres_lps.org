@@ -38,7 +38,8 @@ of them:
 Is type theory vs. set theory interesting for non-philosophers?
 ** Computer proof assistants
 Assist the mathematician in writing down a proof and check its
-correctness. These are almost all based on type theory: Agda, Coq,
+correctness.
+These are almost all based on type theory: Agda, Coq,
 Isabelle/HOL, Lean. Exception: Mizar.
 
 Example mathematician users:
@@ -153,7 +154,7 @@ ill-formed
 both subsets and        subsets are characteristic functions
 characteristic fcts     e.g. isNonNeg : ℤ → Bool
 *** Propositions as types
-| P ⊃ Q                             | P → Q       | prop     | Heyting
+| P ⊃ Q                             | P → Q       | prop     |
 | P ∧ Q                             | P × Q       | prop     |
 | P ∨ Q                             | P ⊎ Q       | prop     |
 | ⊤                                 | Unit        | prop     |
